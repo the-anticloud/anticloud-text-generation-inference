@@ -1,0 +1,852 @@
+{
+ "bomFormat": "CycloneDX",
+ "specVersion": "1.5",
+ "serialNumber": "urn:uuid:6e9128c8-2d4f-586f-a3f5-26484e64b012",
+ "version": 1,
+ "metadata": {
+  "timestamp": "2026-10-06T17:31:37Z",
+  "component": {
+   "type": "application",
+   "name": "TEXT_GENERATION_INFERENCE",
+   "version": "83b357604d34",
+   "bom-ref": "pkg:generic/anticloud/TEXT_GENERATION_INFERENCE@83b357604d34",
+   "purl": "pkg:generic/anticloud/TEXT_GENERATION_INFERENCE@83b357604d34",
+   "licenses": [
+    {
+     "license": {
+      "id": "Apache-2.0"
+     }
+    }
+   ]
+  },
+  "properties": [
+   {
+    "name": "anticloud:source-commit",
+    "value": "null"
+   },
+   {
+    "name": "anticloud:source-url",
+    "value": "https://github.com/the-anticloud/OPENMRS_CORE.git"
+   },
+   {
+    "name": "anticloud:tier",
+    "value": "tier-agent"
+   }
+  ]
+ },
+ "components": [
+  {
+   "type": "library",
+   "name": "resolver",
+   "version": "2",
+   "purl": "pkg:cargo/resolver@2",
+   "bom-ref": "cargo/resolver@2"
+  },
+  {
+   "type": "library",
+   "name": "version",
+   "version": "3.3.6-dev0",
+   "purl": "pkg:cargo/version@3.3.6-dev0",
+   "bom-ref": "cargo/version@3.3.6-dev0"
+  },
+  {
+   "type": "library",
+   "name": "edition",
+   "version": "2021",
+   "purl": "pkg:cargo/edition@2021",
+   "bom-ref": "cargo/edition@2021"
+  },
+  {
+   "type": "library",
+   "name": "homepage",
+   "version": "https://github.com/huggingface/text-generation-inference",
+   "purl": "pkg:cargo/homepage@https://github.com/huggingface/text-generation-inference",
+   "bom-ref": "cargo/homepage@https://github.com/huggingface/text-generation-inference"
+  },
+  {
+   "type": "library",
+   "name": "base64",
+   "version": "0.22.0",
+   "purl": "pkg:cargo/base64@0.22.0",
+   "bom-ref": "cargo/base64@0.22.0"
+  },
+  {
+   "type": "library",
+   "name": "tokenizers",
+   "version": "0.20.0",
+   "purl": "pkg:cargo/tokenizers@0.20.0",
+   "bom-ref": "cargo/tokenizers@0.20.0"
+  },
+  {
+   "type": "library",
+   "name": "hf-hub",
+   "version": "0.4.2",
+   "purl": "pkg:cargo/hf-hub@0.4.2",
+   "bom-ref": "cargo/hf-hub@0.4.2"
+  },
+  {
+   "type": "library",
+   "name": "metrics",
+   "version": "0.23.0",
+   "purl": "pkg:cargo/metrics@0.23.0",
+   "bom-ref": "cargo/metrics@0.23.0"
+  },
+  {
+   "type": "library",
+   "name": "metrics-exporter-prometheus",
+   "version": "0.15.1",
+   "purl": "pkg:cargo/metrics-exporter-prometheus@0.15.1",
+   "bom-ref": "cargo/metrics-exporter-prometheus@0.15.1"
+  },
+  {
+   "type": "library",
+   "name": "minijinja",
+   "version": "2.2.0",
+   "purl": "pkg:cargo/minijinja@2.2.0",
+   "bom-ref": "cargo/minijinja@2.2.0"
+  },
+  {
+   "type": "library",
+   "name": "minijinja-contrib",
+   "version": "2.0.2",
+   "purl": "pkg:cargo/minijinja-contrib@2.0.2",
+   "bom-ref": "cargo/minijinja-contrib@2.0.2"
+  },
+  {
+   "type": "library",
+   "name": "pyo3",
+   "version": "0.22.2",
+   "purl": "pkg:cargo/pyo3@0.22.2",
+   "bom-ref": "cargo/pyo3@0.22.2"
+  },
+  {
+   "type": "library",
+   "name": "inherits",
+   "version": "release",
+   "purl": "pkg:cargo/inherits@release",
+   "bom-ref": "cargo/inherits@release"
+  },
+  {
+   "type": "library",
+   "name": "panic",
+   "version": "abort",
+   "purl": "pkg:cargo/panic@abort",
+   "bom-ref": "cargo/panic@abort"
+  },
+  {
+   "type": "library",
+   "name": "lto",
+   "version": "fat",
+   "purl": "pkg:cargo/lto@fat",
+   "bom-ref": "cargo/lto@fat"
+  },
+  {
+   "type": "library",
+   "name": "click",
+   "version": "<8.2.0",
+   "purl": "pkg:pypi/click@8.2.0",
+   "bom-ref": "pypi/click@<8.2.0"
+  },
+  {
+   "type": "library",
+   "name": "einops",
+   "version": ">=0.8.0",
+   "purl": "pkg:pypi/einops@0.8.0",
+   "bom-ref": "pypi/einops@>=0.8.0"
+  },
+  {
+   "type": "library",
+   "name": "grpc-interceptor",
+   "version": ">=0.15.4",
+   "purl": "pkg:pypi/grpc-interceptor@0.15.4",
+   "bom-ref": "pypi/grpc-interceptor@>=0.15.4"
+  },
+  {
+   "type": "library",
+   "name": "grpcio",
+   "version": ">=1.67.0",
+   "purl": "pkg:pypi/grpcio@1.67.0",
+   "bom-ref": "pypi/grpcio@>=1.67.0"
+  },
+  {
+   "type": "library",
+   "name": "grpcio-reflection",
+   "version": ">=1.67.0",
+   "purl": "pkg:pypi/grpcio-reflection@1.67.0",
+   "bom-ref": "pypi/grpcio-reflection@>=1.67.0"
+  },
+  {
+   "type": "library",
+   "name": "grpcio-status",
+   "version": ">=1.67.0",
+   "purl": "pkg:pypi/grpcio-status@1.67.0",
+   "bom-ref": "pypi/grpcio-status@>=1.67.0"
+  },
+  {
+   "type": "library",
+   "name": "kernels",
+   "version": ">=0.2.1",
+   "purl": "pkg:pypi/kernels@0.2.1",
+   "bom-ref": "pypi/kernels@>=0.2.1"
+  },
+  {
+   "type": "library",
+   "name": "hf-transfer",
+   "version": ">=0.1.8",
+   "purl": "pkg:pypi/hf-transfer@0.1.8",
+   "bom-ref": "pypi/hf-transfer@>=0.1.8"
+  },
+  {
+   "type": "library",
+   "name": "loguru",
+   "version": ">=0.7.3",
+   "purl": "pkg:pypi/loguru@0.7.3",
+   "bom-ref": "pypi/loguru@>=0.7.3"
+  },
+  {
+   "type": "library",
+   "name": "numpy",
+   "version": ">=1.26",
+   "purl": "pkg:pypi/numpy@1.26",
+   "bom-ref": "pypi/numpy@>=1.26"
+  },
+  {
+   "type": "library",
+   "name": "opentelemetry-api",
+   "version": ">=1.27.0",
+   "purl": "pkg:pypi/opentelemetry-api@1.27.0",
+   "bom-ref": "pypi/opentelemetry-api@>=1.27.0"
+  },
+  {
+   "type": "library",
+   "name": "opentelemetry-exporter-otlp",
+   "version": ">=1.27.0",
+   "purl": "pkg:pypi/opentelemetry-exporter-otlp@1.27.0",
+   "bom-ref": "pypi/opentelemetry-exporter-otlp@>=1.27.0"
+  },
+  {
+   "type": "library",
+   "name": "opentelemetry-instrumentation-grpc",
+   "version": ">=0.50b0",
+   "purl": "pkg:pypi/opentelemetry-instrumentation-grpc@0.50b0",
+   "bom-ref": "pypi/opentelemetry-instrumentation-grpc@>=0.50b0"
+  },
+  {
+   "type": "library",
+   "name": "pillow",
+   "version": ">=11.1.0",
+   "purl": "pkg:pypi/pillow@11.1.0",
+   "bom-ref": "pypi/pillow@>=11.1.0"
+  },
+  {
+   "type": "library",
+   "name": "prometheus-client",
+   "version": ">=0.21.0",
+   "purl": "pkg:pypi/prometheus-client@0.21.0",
+   "bom-ref": "pypi/prometheus-client@>=0.21.0"
+  },
+  {
+   "type": "library",
+   "name": "protobuf",
+   "version": ">=5.28.3",
+   "purl": "pkg:pypi/protobuf@5.28.3",
+   "bom-ref": "pypi/protobuf@>=5.28.3"
+  },
+  {
+   "type": "library",
+   "name": "py-cpuinfo",
+   "version": ">=9.0.0",
+   "purl": "pkg:pypi/py-cpuinfo@9.0.0",
+   "bom-ref": "pypi/py-cpuinfo@>=9.0.0"
+  },
+  {
+   "type": "library",
+   "name": "rich",
+   "version": ">=13.8.1",
+   "purl": "pkg:pypi/rich@13.8.1",
+   "bom-ref": "pypi/rich@>=13.8.1"
+  },
+  {
+   "type": "library",
+   "name": "safetensors",
+   "version": ">=0.4.5",
+   "purl": "pkg:pypi/safetensors@0.4.5",
+   "bom-ref": "pypi/safetensors@>=0.4.5"
+  },
+  {
+   "type": "library",
+   "name": "scipy",
+   "version": ">=1.13.1",
+   "purl": "pkg:pypi/scipy@1.13.1",
+   "bom-ref": "pypi/scipy@>=1.13.1"
+  },
+  {
+   "type": "library",
+   "name": "sentencepiece",
+   "version": ">=0.2.0",
+   "purl": "pkg:pypi/sentencepiece@0.2.0",
+   "bom-ref": "pypi/sentencepiece@>=0.2.0"
+  },
+  {
+   "type": "library",
+   "name": "tokenizers",
+   "version": ">=0.20.3",
+   "purl": "pkg:pypi/tokenizers@0.20.3",
+   "bom-ref": "pypi/tokenizers@>=0.20.3"
+  },
+  {
+   "type": "library",
+   "name": "typer",
+   "version": ">=0.15.1",
+   "purl": "pkg:pypi/typer@0.15.1",
+   "bom-ref": "pypi/typer@>=0.15.1"
+  },
+  {
+   "type": "library",
+   "name": "transformers",
+   "version": ">=4.51.0",
+   "purl": "pkg:pypi/transformers@4.51.0",
+   "bom-ref": "pypi/transformers@>=4.51.0"
+  },
+  {
+   "type": "library",
+   "name": "huggingface-hub",
+   "version": ">=0.30.1",
+   "purl": "pkg:pypi/huggingface-hub@0.30.1",
+   "bom-ref": "pypi/huggingface-hub@>=0.30.1"
+  },
+  {
+   "type": "library",
+   "name": "hf-xet",
+   "version": ">=1.0.0",
+   "purl": "pkg:pypi/hf-xet@1.0.0",
+   "bom-ref": "pypi/hf-xet@>=1.0.0"
+  },
+  {
+   "type": "library",
+   "name": "-DLEGACY_HIPBLAS_DIRECT",
+   "version": "=ON",
+   "purl": "pkg:pypi/-dlegacy-hipblas-direct@ON",
+   "bom-ref": "pypi/-DLEGACY_HIPBLAS_DIRECT@=ON"
+  },
+  {
+   "type": "library",
+   "name": "-std",
+   "version": "=c++17",
+   "purl": "pkg:pypi/-std@c++17",
+   "bom-ref": "pypi/-std@=c++17"
+  },
+  {
+   "type": "library",
+   "name": "name",
+   "version": "text-generation-router",
+   "purl": "pkg:cargo/name@text-generation-router",
+   "bom-ref": "cargo/name@text-generation-router"
+  },
+  {
+   "type": "library",
+   "name": "description",
+   "version": "Text Generation Webserver",
+   "purl": "pkg:cargo/description@Text Generation Webserver",
+   "bom-ref": "cargo/description@Text Generation Webserver"
+  },
+  {
+   "type": "library",
+   "name": "build",
+   "version": "build.rs",
+   "purl": "pkg:cargo/build@build.rs",
+   "bom-ref": "cargo/build@build.rs"
+  },
+  {
+   "type": "library",
+   "name": "anyhow",
+   "version": "1",
+   "purl": "pkg:cargo/anyhow@1",
+   "bom-ref": "cargo/anyhow@1"
+  },
+  {
+   "type": "library",
+   "name": "async-trait",
+   "version": "0.1.74",
+   "purl": "pkg:cargo/async-trait@0.1.74",
+   "bom-ref": "cargo/async-trait@0.1.74"
+  },
+  {
+   "type": "library",
+   "name": "async-stream",
+   "version": "0.3.5",
+   "purl": "pkg:cargo/async-stream@0.3.5",
+   "bom-ref": "cargo/async-stream@0.3.5"
+  },
+  {
+   "type": "library",
+   "name": "axum",
+   "version": "0.7",
+   "purl": "pkg:cargo/axum@0.7",
+   "bom-ref": "cargo/axum@0.7"
+  },
+  {
+   "type": "library",
+   "name": "axum-tracing-opentelemetry",
+   "version": "0.16",
+   "purl": "pkg:cargo/axum-tracing-opentelemetry@0.16",
+   "bom-ref": "cargo/axum-tracing-opentelemetry@0.16"
+  },
+  {
+   "type": "library",
+   "name": "clap",
+   "version": "4.4.5",
+   "purl": "pkg:cargo/clap@4.4.5",
+   "bom-ref": "cargo/clap@4.4.5"
+  },
+  {
+   "type": "library",
+   "name": "futures",
+   "version": "0.3.28",
+   "purl": "pkg:cargo/futures@0.3.28",
+   "bom-ref": "cargo/futures@0.3.28"
+  },
+  {
+   "type": "library",
+   "name": "itertools",
+   "version": "0.10",
+   "purl": "pkg:cargo/itertools@0.10",
+   "bom-ref": "cargo/itertools@0.10"
+  },
+  {
+   "type": "library",
+   "name": "jsonschema",
+   "version": "0.28.0",
+   "purl": "pkg:cargo/jsonschema@0.28.0",
+   "bom-ref": "cargo/jsonschema@0.28.0"
+  },
+  {
+   "type": "library",
+   "name": "nohash-hasher",
+   "version": "0.2.0",
+   "purl": "pkg:cargo/nohash-hasher@0.2.0",
+   "bom-ref": "cargo/nohash-hasher@0.2.0"
+  },
+  {
+   "type": "library",
+   "name": "opentelemetry",
+   "version": "0.20.0",
+   "purl": "pkg:cargo/opentelemetry@0.20.0",
+   "bom-ref": "cargo/opentelemetry@0.20.0"
+  },
+  {
+   "type": "library",
+   "name": "opentelemetry-otlp",
+   "version": "0.13.0",
+   "purl": "pkg:cargo/opentelemetry-otlp@0.13.0",
+   "bom-ref": "cargo/opentelemetry-otlp@0.13.0"
+  },
+  {
+   "type": "library",
+   "name": "rand",
+   "version": "0.8.5",
+   "purl": "pkg:cargo/rand@0.8.5",
+   "bom-ref": "cargo/rand@0.8.5"
+  },
+  {
+   "type": "library",
+   "name": "reqwest",
+   "version": "0.11.20",
+   "purl": "pkg:cargo/reqwest@0.11.20",
+   "bom-ref": "cargo/reqwest@0.11.20"
+  },
+  {
+   "type": "library",
+   "name": "serde",
+   "version": "1.0.188",
+   "purl": "pkg:cargo/serde@1.0.188",
+   "bom-ref": "cargo/serde@1.0.188"
+  },
+  {
+   "type": "library",
+   "name": "serde_json",
+   "version": "1.0.107",
+   "purl": "pkg:cargo/serde_json@1.0.107",
+   "bom-ref": "cargo/serde_json@1.0.107"
+  },
+  {
+   "type": "library",
+   "name": "thiserror",
+   "version": "1.0.48",
+   "purl": "pkg:cargo/thiserror@1.0.48",
+   "bom-ref": "cargo/thiserror@1.0.48"
+  },
+  {
+   "type": "library",
+   "name": "tokio",
+   "version": "1.32.0",
+   "purl": "pkg:cargo/tokio@1.32.0",
+   "bom-ref": "cargo/tokio@1.32.0"
+  },
+  {
+   "type": "library",
+   "name": "tokio-stream",
+   "version": "0.1.14",
+   "purl": "pkg:cargo/tokio-stream@0.1.14",
+   "bom-ref": "cargo/tokio-stream@0.1.14"
+  },
+  {
+   "type": "library",
+   "name": "tower-http",
+   "version": "0.5.1",
+   "purl": "pkg:cargo/tower-http@0.5.1",
+   "bom-ref": "cargo/tower-http@0.5.1"
+  },
+  {
+   "type": "library",
+   "name": "tracing",
+   "version": "0.1.40",
+   "purl": "pkg:cargo/tracing@0.1.40",
+   "bom-ref": "cargo/tracing@0.1.40"
+  },
+  {
+   "type": "library",
+   "name": "tracing-opentelemetry",
+   "version": "0.21.0",
+   "purl": "pkg:cargo/tracing-opentelemetry@0.21.0",
+   "bom-ref": "cargo/tracing-opentelemetry@0.21.0"
+  },
+  {
+   "type": "library",
+   "name": "tracing-subscriber",
+   "version": "0.3.18",
+   "purl": "pkg:cargo/tracing-subscriber@0.3.18",
+   "bom-ref": "cargo/tracing-subscriber@0.3.18"
+  },
+  {
+   "type": "library",
+   "name": "utoipa",
+   "version": "4.2.0",
+   "purl": "pkg:cargo/utoipa@4.2.0",
+   "bom-ref": "cargo/utoipa@4.2.0"
+  },
+  {
+   "type": "library",
+   "name": "utoipa-swagger-ui",
+   "version": "6.0.0",
+   "purl": "pkg:cargo/utoipa-swagger-ui@6.0.0",
+   "bom-ref": "cargo/utoipa-swagger-ui@6.0.0"
+  },
+  {
+   "type": "library",
+   "name": "ngrok",
+   "version": "0.13.1",
+   "purl": "pkg:cargo/ngrok@0.13.1",
+   "bom-ref": "cargo/ngrok@0.13.1"
+  },
+  {
+   "type": "library",
+   "name": "init-tracing-opentelemetry",
+   "version": "0.14.1",
+   "purl": "pkg:cargo/init-tracing-opentelemetry@0.14.1",
+   "bom-ref": "cargo/init-tracing-opentelemetry@0.14.1"
+  },
+  {
+   "type": "library",
+   "name": "futures-util",
+   "version": "0.3.30",
+   "purl": "pkg:cargo/futures-util@0.3.30",
+   "bom-ref": "cargo/futures-util@0.3.30"
+  },
+  {
+   "type": "library",
+   "name": "regex",
+   "version": "1.10.3",
+   "purl": "pkg:cargo/regex@1.10.3",
+   "bom-ref": "cargo/regex@1.10.3"
+  },
+  {
+   "type": "library",
+   "name": "once_cell",
+   "version": "1.19.0",
+   "purl": "pkg:cargo/once_cell@1.19.0",
+   "bom-ref": "cargo/once_cell@1.19.0"
+  },
+  {
+   "type": "library",
+   "name": "image",
+   "version": "0.25.1",
+   "purl": "pkg:cargo/image@0.25.1",
+   "bom-ref": "cargo/image@0.25.1"
+  },
+  {
+   "type": "library",
+   "name": "sysinfo",
+   "version": "0.30.13",
+   "purl": "pkg:cargo/sysinfo@0.30.13",
+   "bom-ref": "cargo/sysinfo@0.30.13"
+  },
+  {
+   "type": "library",
+   "name": "uuid",
+   "version": "1.9.1",
+   "purl": "pkg:cargo/uuid@1.9.1",
+   "bom-ref": "cargo/uuid@1.9.1"
+  },
+  {
+   "type": "library",
+   "name": "csv",
+   "version": "1.3.0",
+   "purl": "pkg:cargo/csv@1.3.0",
+   "bom-ref": "cargo/csv@1.3.0"
+  },
+  {
+   "type": "library",
+   "name": "ureq",
+   "version": "=2.9",
+   "purl": "pkg:cargo/ureq@=2.9",
+   "bom-ref": "cargo/ureq@=2.9"
+  },
+  {
+   "type": "library",
+   "name": "chrono",
+   "version": "0.4.39",
+   "purl": "pkg:cargo/chrono@0.4.39",
+   "bom-ref": "cargo/chrono@0.4.39"
+  },
+  {
+   "type": "library",
+   "name": "vergen",
+   "version": "8.2.5",
+   "purl": "pkg:cargo/vergen@8.2.5",
+   "bom-ref": "cargo/vergen@8.2.5"
+  },
+  {
+   "type": "library",
+   "name": "ctrlc",
+   "version": "3.4.1",
+   "purl": "pkg:cargo/ctrlc@3.4.1",
+   "bom-ref": "cargo/ctrlc@3.4.1"
+  },
+  {
+   "type": "library",
+   "name": "nix",
+   "version": "0.28.0",
+   "purl": "pkg:cargo/nix@0.28.0",
+   "bom-ref": "cargo/nix@0.28.0"
+  },
+  {
+   "type": "library",
+   "name": "float_eq",
+   "version": "1.0.1",
+   "purl": "pkg:cargo/float_eq@1.0.1",
+   "bom-ref": "cargo/float_eq@1.0.1"
+  },
+  {
+   "type": "library",
+   "name": "pydantic",
+   "version": ">2",
+   "purl": "pkg:pypi/pydantic@2",
+   "bom-ref": "pypi/pydantic@>2"
+  },
+  {
+   "type": "library",
+   "name": "syrupy",
+   "version": ">=4.8.0",
+   "purl": "pkg:pypi/syrupy@4.8.0",
+   "bom-ref": "pypi/syrupy@>=4.8.0"
+  },
+  {
+   "type": "library",
+   "name": "text-generation",
+   "version": ">=0.6.0",
+   "purl": "pkg:pypi/text-generation@0.6.0",
+   "bom-ref": "pypi/text-generation@>=0.6.0"
+  },
+  {
+   "type": "library",
+   "name": "pytest",
+   "version": ">=8.3.0",
+   "purl": "pkg:pypi/pytest@8.3.0",
+   "bom-ref": "pypi/pytest@>=8.3.0"
+  },
+  {
+   "type": "library",
+   "name": "pytest-asyncio",
+   "version": ">=0.23.1",
+   "purl": "pkg:pypi/pytest-asyncio@0.23.1",
+   "bom-ref": "pypi/pytest-asyncio@>=0.23.1"
+  },
+  {
+   "type": "library",
+   "name": "docker",
+   "version": ">=7",
+   "purl": "pkg:pypi/docker@7",
+   "bom-ref": "pypi/docker@>=7"
+  },
+  {
+   "type": "library",
+   "name": "openai",
+   "version": ">=1.65",
+   "purl": "pkg:pypi/openai@1.65",
+   "bom-ref": "pypi/openai@>=1.65"
+  },
+  {
+   "type": "library",
+   "name": "huggingface_hub",
+   "version": ">=0.29",
+   "purl": "pkg:pypi/huggingface-hub@0.29",
+   "bom-ref": "pypi/huggingface_hub@>=0.29"
+  },
+  {
+   "type": "library",
+   "name": "path",
+   "version": "src/lib.rs",
+   "purl": "pkg:cargo/path@src/lib.rs",
+   "bom-ref": "cargo/path@src/lib.rs"
+  },
+  {
+   "type": "library",
+   "name": "average",
+   "version": "0.14",
+   "purl": "pkg:cargo/average@0.14",
+   "bom-ref": "cargo/average@0.14"
+  },
+  {
+   "type": "library",
+   "name": "float-ord",
+   "version": "0.3.2",
+   "purl": "pkg:cargo/float-ord@0.3.2",
+   "bom-ref": "cargo/float-ord@0.3.2"
+  },
+  {
+   "type": "library",
+   "name": "tabled",
+   "version": "0.14.0",
+   "purl": "pkg:cargo/tabled@0.14.0",
+   "bom-ref": "cargo/tabled@0.14.0"
+  },
+  {
+   "type": "library",
+   "name": "ratatui",
+   "version": "0.28.1",
+   "purl": "pkg:cargo/ratatui@0.28.1",
+   "bom-ref": "cargo/ratatui@0.28.1"
+  },
+  {
+   "type": "library",
+   "name": "slotmap",
+   "version": "1.0.7",
+   "purl": "pkg:cargo/slotmap@1.0.7",
+   "bom-ref": "cargo/slotmap@1.0.7"
+  },
+  {
+   "type": "library",
+   "name": "prost",
+   "version": "^0.12",
+   "purl": "pkg:cargo/prost@^0.12",
+   "bom-ref": "cargo/prost@^0.12"
+  },
+  {
+   "type": "library",
+   "name": "tonic",
+   "version": "^0.10",
+   "purl": "pkg:cargo/tonic@^0.10",
+   "bom-ref": "cargo/tonic@^0.10"
+  },
+  {
+   "type": "library",
+   "name": "tower",
+   "version": "^0.4",
+   "purl": "pkg:cargo/tower@^0.4",
+   "bom-ref": "cargo/tower@^0.4"
+  },
+  {
+   "type": "library",
+   "name": "tonic-build",
+   "version": "0.10.1",
+   "purl": "pkg:cargo/tonic-build@0.10.1",
+   "bom-ref": "cargo/tonic-build@0.10.1"
+  },
+  {
+   "type": "library",
+   "name": "prost-build",
+   "version": "0.12.1",
+   "purl": "pkg:cargo/prost-build@0.12.1",
+   "bom-ref": "cargo/prost-build@0.12.1"
+  },
+  {
+   "type": "library",
+   "name": "criterion",
+   "version": "0.3",
+   "purl": "pkg:cargo/criterion@0.3",
+   "bom-ref": "cargo/criterion@0.3"
+  },
+  {
+   "type": "library",
+   "name": "rustc-hash",
+   "version": "2",
+   "purl": "pkg:cargo/rustc-hash@2",
+   "bom-ref": "cargo/rustc-hash@2"
+  },
+  {
+   "type": "library",
+   "name": "cxx",
+   "version": "1.0",
+   "purl": "pkg:cargo/cxx@1.0",
+   "bom-ref": "cargo/cxx@1.0"
+  },
+  {
+   "type": "library",
+   "name": "hashbrown",
+   "version": "0.15",
+   "purl": "pkg:cargo/hashbrown@0.15",
+   "bom-ref": "cargo/hashbrown@0.15"
+  },
+  {
+   "type": "library",
+   "name": "cmake",
+   "version": "0.1",
+   "purl": "pkg:cargo/cmake@0.1",
+   "bom-ref": "cargo/cmake@0.1"
+  },
+  {
+   "type": "library",
+   "name": "cxx-build",
+   "version": "1.0",
+   "purl": "pkg:cargo/cxx-build@1.0",
+   "bom-ref": "cargo/cxx-build@1.0"
+  },
+  {
+   "type": "library",
+   "name": "pkg-config",
+   "version": "0.3",
+   "purl": "pkg:cargo/pkg-config@0.3",
+   "bom-ref": "cargo/pkg-config@0.3"
+  },
+  {
+   "type": "library",
+   "name": "CUDAToolkit",
+   "version": "unspecified",
+   "purl": "pkg:generic/CUDAToolkit",
+   "bom-ref": "native/CUDAToolkit@unspecified"
+  },
+  {
+   "type": "library",
+   "name": "MPI",
+   "version": "unspecified",
+   "purl": "pkg:generic/MPI",
+   "bom-ref": "native/MPI@unspecified"
+  },
+  {
+   "type": "library",
+   "name": "bindgen",
+   "version": "0.71.1",
+   "purl": "pkg:cargo/bindgen@0.71.1",
+   "bom-ref": "cargo/bindgen@0.71.1"
+  },
+  {
+   "type": "library",
+   "name": "num_cpus",
+   "version": "1.16.0",
+   "purl": "pkg:cargo/num_cpus@1.16.0",
+   "bom-ref": "cargo/num_cpus@1.16.0"
+  }
+ ],
+ "sha_unverified": true
+}
