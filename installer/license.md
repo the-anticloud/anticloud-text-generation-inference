@@ -1,11 +1,11 @@
-# Anticommons 0.1.0 License — TEXT_GENERATION_INFERENCE
+# Anticommons 0.1.0 License — ai-oss-gateway
 
-**Project:** `TEXT_GENERATION_INFERENCE`
-**Category:** FRONTIER_HARNESSES
-**Domain:** Frontier Harnesses
+**Project:** `ai-oss-gateway`
+**Tier:** TIER_3_ANTICLOUD_APIOSS
+**Domain:** API gateway, compliance engine, open-source tooling, certification
 **Maintainer:** Anticloud FZ LLE · 0-1.gg · lois@0-1.gg · Dubai, UAE
 **Model:** Anticloud PAX L5 Narrow L2 General 27B
-**Upstream:** https://github.com/huggingface/text-generation-inference @ b4adbf2f6e2e
+**AIOSS Chain:** `8b4a8a4f6312dfbe885de8280716985637c163fd2a4b5590341d56db1cc4e560`
 **Date:** October 2026
 
 ---
@@ -21,11 +21,11 @@
 
 ## Grant of Rights
 
-Subject to the terms of this License, Anticloud FZ LLE grants you a non-exclusive, non-transferable, worldwide license to use, deploy, and integrate `TEXT_GENERATION_INFERENCE` in commercial and regulated-sector applications.
+Subject to the terms of this License, Anticloud FZ LLE grants you a non-exclusive, non-transferable, worldwide license to use, deploy, and integrate `ai-oss-gateway` in commercial and regulated-sector applications.
 
 ## Open-Source Baseline
 
-The core of `TEXT_GENERATION_INFERENCE` is released under Apache 2.0. The Apache 2.0 license applies to all components not specifically identified as proprietary in `08_INTELLECTUAL_PROPERTY_AND_RIGHTS/INTELLECTUAL_PROPERTY_AND_RIGHTS.md`.
+The core of `ai-oss-gateway` is released under Apache 2.0. The Apache 2.0 license applies to all components not specifically identified as proprietary in `08_INTELLECTUAL_PROPERTY_AND_RIGHTS/INTELLECTUAL_PROPERTY_AND_RIGHTS.md`.
 
 ## Enterprise Addendum
 
@@ -35,7 +35,7 @@ The Anticommons Enterprise License supplements Apache 2.0 for commercial deploym
 - Commercial deployment in production regulated environments
 - Whitelabelling and OEM redistribution (see `06_WHITELABELLING_AND_REPACKAGING/`)
 - Integration with proprietary products
-- Customer-facing AI services built on `TEXT_GENERATION_INFERENCE`
+- Customer-facing AI services built on `ai-oss-gateway`
 
 **Required:**
 1. AIOSS chain integrity must be maintained in all deployments
@@ -52,7 +52,7 @@ The Anticommons Enterprise License supplements Apache 2.0 for commercial deploym
 
 ## Intellectual Property
 
-KANTOR K5, AIOSS format, and System of Things (SoT) architecture are USPTO-pending intellectual property of Anticloud FZ LLE. Use of these elements within `TEXT_GENERATION_INFERENCE` is licensed under this agreement; standalone reproduction is not.
+KANTOR K5, AIOSS format, and System of Things (SoT) architecture are USPTO-pending intellectual property of Anticloud FZ LLE. Use of these elements within `ai-oss-gateway` is licensed under this agreement; standalone reproduction is not.
 
 ## Warranty Disclaimer
 

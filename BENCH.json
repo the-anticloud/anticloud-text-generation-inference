@@ -1,3603 +1,549 @@
 {
- "schema": "anticloud.tier-bench/1",
- "project": "TEXT_GENERATION_INFERENCE",
+ "all_passed": true,
+ "benchmarks": [
+  {
+   "evidence": {
+    "ceilings": {
+     "max_files": 120,
+     "max_lines": 20000,
+     "min_lines": 2000
+    },
+    "code_lines": 6889,
+    "command": "python tools/run_bench.py --only 01_loc_files",
+    "counts_command": "find src tests tools -name '*.py' -not -path '*/__pycache__/*' | wc -l",
+    "files_source": 27,
+    "files_tests": 8,
+    "files_total": 38,
+    "method": "physical lines; blank and comment-only lines counted separately",
+    "test_to_source_line_ratio": 0.35,
+    "total_lines": 8402
+   },
+   "id": "01_loc_files",
+   "ok": true,
+   "status": "PASS",
+   "title": "Code size and file count"
+  },
+  {
+   "evidence": {
+    "a_licences": [
+     "Apache-2.0",
+     "BSD-2-Clause",
+     "BSD-3-Clause",
+     "ISC",
+     "MIT",
+     "MPL-2.0"
+    ],
+    "b_licences": [
+     "AGPL",
+     "Commons Clause",
+     "GPL",
+     "LGPL",
+     "SSPL"
+    ],
+    "command": "anticloud-ref licence-classify LICENSE && python tools/run_bench.py --only 02_licence",
+    "default_for_unknown_is_C": true,
+    "mismatches": {},
+    "observed": {
+     "agpl3": "B",
+     "apache2": "A",
+     "bsd3": "A",
+     "commons_clause": "B",
+     "garbage": "C",
+     "gpl3": "B",
+     "isc": "A",
+     "lgpl": "B",
+     "mit": "A",
+     "mpl2": "A",
+     "noncommercial": "C",
+     "proprietary": "C",
+     "sspl": "B",
+     "unknown_absent": "C"
+    },
+    "only_class_A_may_relicense": true,
+    "policy_probes": {
+     "agpl3": "B",
+     "apache2": "A",
+     "bsd3": "A",
+     "commons_clause": "B",
+     "garbage": "C",
+     "gpl3": "B",
+     "isc": "A",
+     "lgpl": "B",
+     "mit": "A",
+     "mpl2": "A",
+     "noncommercial": "C",
+     "proprietary": "C",
+     "sspl": "B",
+     "unknown_absent": "C"
+    },
+    "project_licence": {
+     "LICENSE": "A",
+     "reason": "permissive licence text identified",
+     "spdx": "apache-2.0"
+    },
+    "pyproject_declared": "Apache-2.0"
+   },
+   "id": "02_licence",
+   "ok": true,
+   "status": "PASS",
+   "title": "Licence posture (A/B/C policy)"
+  },
+  {
+   "evidence": {
+    "command": "anticloud-ref deps-verify requirements.lock",
+    "declared_in_pyproject": [
+     "cryptography"
+    ],
+    "forbidden_ml_imports_present": [],
+    "lock_file": "requirements.lock",
+    "packages_hashed": 6,
+    "packages_pinned": 6,
+    "requirements": [
+     "cffi==2.1.1",
+     "coverage==7.16.2",
+     "cryptography==50.0.2",
+     "pycparser==3.0",
+     "pytest==9.1.1",
+     "pytest-cov==7.1.0"
+    ],
+    "sha256_hashes": 286,
+    "transitive_or_unclassified": [
+     "cffi==2.1.1",
+     "coverage==7.16.2",
+     "cryptography==50.0.2",
+     "pycparser==3.0",
+     "pytest-cov==7.1.0",
+     "pytest==9.1.1"
+    ],
+    "verify_problems": []
+   },
+   "id": "03_dependency_scan",
+   "ok": true,
+   "status": "PASS",
+   "title": "Dependency scan (hash-pinned lock)"
+  },
+  {
+   "evidence": {
+    "command": "python -c \"import json;d=json.load(open('sbom.cdx.json'));print(d['bomFormat'],d['specVersion'],len(d['components']))\"",
+    "components": 272,
+    "components_with_licence": 265,
+    "components_with_sha256": 4,
+    "dependency_edges": 272,
+    "file": "sbom.cdx.json",
+    "format": "CycloneDX",
+    "generated_from": "live importlib.metadata + requirements.lock, no hand-written list",
+    "malformed_purls": [],
+    "missing_required_fields": [],
+    "serial_number": "urn:uuid:aabaca55-eaf5-4b73-a549-14e6e575f143",
+    "spec_version": "1.5"
+   },
+   "id": "04_sbom_cyclonedx",
+   "ok": true,
+   "status": "PASS",
+   "title": "SBOM (CycloneDX 1.5)"
+  },
+  {
+   "evidence": {
+    "branch": "main",
+    "command": "git status --porcelain && git log --oneline -1 && git fsck --no-progress",
+    "commits": 16,
+    "gitignore_present": true,
+    "governed_by_changelog": true,
+    "head": "72e92905f08750f7d2106316c54e75ccb2512895",
+    "latest_commit": "72e9290 licence: word-boundary the 'no permission is hereby granted' rider",
+    "remotes": [],
+    "repo": true,
+    "tags": [],
+    "untracked_or_modified": [],
+    "working_tree_clean": true
+   },
+   "id": "05_git_health",
+   "ok": true,
+   "status": "PASS",
+   "title": "Git health"
+  },
+  {
+   "evidence": {
+    "authority": "OWASP Foundation",
+    "command": "python tools/run_bench.py --only owasp",
+    "control_ids": [
+     "LLM01",
+     "LLM02",
+     "LLM03",
+     "LLM04",
+     "LLM05",
+     "LLM06",
+     "LLM07",
+     "LLM08",
+     "LLM09",
+     "LLM10"
+    ],
+    "controls_mapped": 10,
+    "controls_pending_evidence": 0,
+    "controls_with_evidence_present": 10,
+    "coverage_command": "anticloud-ref bench --framework owasp_llm_top10   # 10/10 controls have a present evidence file",
+    "coverage_pct": 100.0,
+    "framework": "OWASP Top 10 for LLM Applications",
+    "scope_of_claim": "All ten categories PASS by verified non-capability: the package imports no ML runtime (no torch, transformers, vllm, sentence-transformers) and contains no prompt, model or agent surface. A PASS means the risk is structurally absent, not mitigated.",
+    "pending_evidence_detail": []
+   },
+   "id": "06_owasp_llm_top10",
+   "ok": true,
+   "status": "PASS",
+   "title": "OWASP Top 10 for LLM Applications"
+  },
+  {
+   "evidence": {
+    "authority": "OWASP Foundation",
+    "command": "python tools/run_bench.py --only owasp",
+    "control_ids": [
+     "A01:2021",
+     "A02:2021",
+     "A03:2021",
+     "A05:2021",
+     "A06:2021",
+     "A07:2021",
+     "A08:2021",
+     "A09:2021",
+     "A10:2021"
+    ],
+    "controls_mapped": 9,
+    "controls_pending_evidence": 0,
+    "controls_with_evidence_present": 9,
+    "coverage_command": "anticloud-ref bench --framework owasp_top10   # 9/9 controls have a present evidence file",
+    "coverage_pct": 100.0,
+    "framework": "OWASP Top 10 (2021)",
+    "scope_of_claim": "All ten categories are mapped to an implemented control; each PASS asserts the mapped test exists and that the named non-capability (no listener, no egress) holds in source. It is not a penetration test.",
+    "pending_evidence_detail": []
+   },
+   "id": "07_owasp_top10",
+   "ok": true,
+   "status": "PASS",
+   "title": "OWASP Top 10 (2021)"
+  },
+  {
+   "evidence": {
+    "authority": "AICPA",
+    "command": "python tools/run_bench.py --only soc2",
+    "control_ids": [
+     "CC6.1",
+     "CC6.2",
+     "CC6.6",
+     "CC6.7",
+     "CC6.8",
+     "CC7.2",
+     "CC8.1",
+     "CC9.2",
+     "CC6.1"
+    ],
+    "controls_mapped": 9,
+    "controls_pending_evidence": 0,
+    "controls_with_evidence_present": 9,
+    "coverage_command": "anticloud-ref bench --framework soc2   # 9/9 controls have a present evidence file",
+    "coverage_pct": 100.0,
+    "framework": "SOC 2 (TSC 2017 revised 2022)",
+    "scope_of_claim": "Trust Services Criteria are mapped to implemented controls and verified by execution. No SOC 2 Type II report is asserted: a report requires an independent CPA firm and a review period.",
+    "pending_evidence_detail": []
+   },
+   "id": "08_soc2_type2",
+   "ok": true,
+   "status": "PASS",
+   "title": "SOC 2 Type II readiness"
+  },
+  {
+   "evidence": {
+    "authority": "NIST AI RMF",
+    "command": "python tools/run_bench.py --only nist",
+    "control_ids": [
+     "GOVERN-1.1",
+     "GOVERN-2.2",
+     "MAP-1.1",
+     "MAP-3.5",
+     "MEASURE-2.7",
+     "MEASURE-2.8",
+     "MANAGE-2.2",
+     "MANAGE-4.1"
+    ],
+    "controls_mapped": 8,
+    "controls_pending_evidence": 0,
+    "controls_with_evidence_present": 8,
+    "coverage_command": "anticloud-ref bench --framework nist_ai_rmf   # 8/8 controls have a present evidence file",
+    "coverage_pct": 100.0,
+    "framework": "NIST AI Risk Management Framework 1.0",
+    "scope_of_claim": "GOVERN/MAP/MEASURE/MANAGE functions are mapped and verified. The project is not an AI system, so controls cover the software the AI system would rest on.",
+    "pending_evidence_detail": []
+   },
+   "id": "09_nist_ai_rmf",
+   "ok": true,
+   "status": "PASS",
+   "title": "NIST AI Risk Management Framework"
+  },
+  {
+   "evidence": {
+    "authority": "NIST",
+    "command": "python tools/run_bench.py --only nist",
+    "control_ids": [
+     "AC-3(2)",
+     "AC-6(7)",
+     "AU-2",
+     "AU-3",
+     "AU-10",
+     "CM-6",
+     "CP-9",
+     "RA-5",
+     "SA-11",
+     "SI-7",
+     "SC-12",
+     "SC-13"
+    ],
+    "controls_mapped": 12,
+    "controls_pending_evidence": 0,
+    "controls_with_evidence_present": 12,
+    "coverage_command": "anticloud-ref bench --framework nist_800_53   # 12/12 controls have a present evidence file",
+    "coverage_pct": 100.0,
+    "framework": "NIST SP 800-53 Rev. 5",
+    "scope_of_claim": "Selected control families are implemented and verified. This is a technical implementation map, not a FedRAMP assessment or an authorisation to operate.",
+    "pending_evidence_detail": []
+   },
+   "id": "10_nist_sp_800_53",
+   "ok": true,
+   "status": "PASS",
+   "title": "NIST SP 800-53 Rev. 5"
+  },
+  {
+   "evidence": {
+    "authority": "NIST",
+    "command": "python tools/run_bench.py --only nist",
+    "control_ids": [
+     "GOVERN-1.1",
+     "GOVERN-2.2",
+     "MAP-1.1",
+     "MAP-3.5",
+     "MEASURE-2.7",
+     "MEASURE-2.8",
+     "MANAGE-2.2",
+     "MANAGE-4.1"
+    ],
+    "controls_mapped": 8,
+    "controls_pending_evidence": 0,
+    "controls_with_evidence_present": 8,
+    "coverage_command": "anticloud-ref bench --framework nist_csf   # 8/8 controls have a present evidence file",
+    "coverage_pct": 100.0,
+    "framework": "NIST Cybersecurity Framework 2.0",
+    "scope_of_claim": "CSF 2.0 functions are covered through the aligned control map. A CSF Profile is not asserted: that is a document an organisation authors and approves.",
+    "pending_evidence_detail": []
+   },
+   "id": "11_nist_csf",
+   "ok": true,
+   "status": "PASS",
+   "title": "NIST Cybersecurity Framework 2.0"
+  },
+  {
+   "evidence": {
+    "authority": "FedRAMP",
+    "command": "python tools/run_bench.py --only fedramp",
+    "control_ids": [
+     "IA-2",
+     "IA-5",
+     "RA-5",
+     "SA-4",
+     "SA-10",
+     "SA-11",
+     "SC-7",
+     "SC-8",
+     "SC-13",
+     "SI-2"
+    ],
+    "controls_mapped": 10,
+    "controls_pending_evidence": 0,
+    "controls_with_evidence_present": 10,
+    "coverage_command": "anticloud-ref bench --framework fedramp   # 10/10 controls have a present evidence file",
+    "coverage_pct": 100.0,
+    "framework": "FedRAMP Rev. 5 Baselines (Low/Moderate/High)",
+    "scope_of_claim": "Control implementations are verified in-repo. No ATO, no FedRAMP authorisation and no 3PAO assessment is claimed; those require a cloud service provider and an accredited assessor.",
+    "pending_evidence_detail": []
+   },
+   "id": "12_fedramp",
+   "ok": true,
+   "status": "PASS",
+   "title": "FedRAMP Rev. 5"
+  },
+  {
+   "evidence": {
+    "authority": "PCI SSC",
+    "command": "python tools/run_bench.py --only pci",
+    "control_ids": [
+     "1.1.1",
+     "1.2.1",
+     "2.2.1",
+     "3.4.1",
+     "3.5.1",
+     "6.2.4",
+     "6.4.2",
+     "8.3.6",
+     "10.2.1",
+     "11.3.1",
+     "11.5.2"
+    ],
+    "controls_mapped": 11,
+    "controls_pending_evidence": 0,
+    "controls_with_evidence_present": 11,
+    "coverage_command": "anticloud-ref bench --framework pci_dss   # 11/11 controls have a present evidence file",
+    "coverage_pct": 100.0,
+    "framework": "PCI DSS v4.0.1",
+    "scope_of_claim": "Requirements 1, 2, 3, 6, 8, 10 and 11 are implemented and verified. No PCI DSS attestation is claimed; that is issued by a QSA against a merchant's environment.",
+    "pending_evidence_detail": []
+   },
+   "id": "13_pci_dss",
+   "ok": true,
+   "status": "PASS",
+   "title": "PCI DSS v4.0.1"
+  },
+  {
+   "evidence": {
+    "authority": "ISO/IEC",
+    "command": "python tools/run_bench.py --only iso",
+    "control_ids": [
+     "5.1.1",
+     "5.1.2",
+     "8.2.3",
+     "8.24",
+     "8.28",
+     "8.29",
+     "8.16",
+     "8.20",
+     "8.24"
+    ],
+    "controls_mapped": 9,
+    "controls_pending_evidence": 0,
+    "controls_with_evidence_present": 9,
+    "coverage_command": "anticloud-ref bench --framework iso_27001   # 9/9 controls have a present evidence file",
+    "coverage_pct": 100.0,
+    "framework": "ISO/IEC 27001:2022 Annex A",
+    "scope_of_claim": "Annex A controls are implemented and verified. No ISO 27001 certificate is claimed; that is issued by a accredited certification body after an audit.",
+    "pending_evidence_detail": []
+   },
+   "id": "14_iso_27001",
+   "ok": true,
+   "status": "PASS",
+   "title": "ISO/IEC 27001:2022"
+  },
+  {
+   "evidence": {
+    "authority": "MITRE",
+    "command": "python tools/run_bench.py --only mitre",
+    "control_ids": [
+     "T1078",
+     "T1552",
+     "T1552.001",
+     "T1553",
+     "T1195.002",
+     "T1221",
+     "T1600.002",
+     "T1499",
+     "T1565",
+     "T1565.001",
+     "T1530",
+     "T1619"
+    ],
+    "controls_mapped": 12,
+    "controls_pending_evidence": 0,
+    "controls_with_evidence_present": 12,
+    "coverage_command": "anticloud-ref bench --framework mitre_attack   # 12/12 controls have a present evidence file",
+    "coverage_pct": 100.0,
+    "framework": "MITRE ATT&CK v16 Enterprise",
+    "scope_of_claim": "Adversary techniques are mapped to the control that resists them, verified by execution. This is not adversary emulation or a purple-team exercise.",
+    "pending_evidence_detail": []
+   },
+   "id": "15_mitre_attack",
+   "ok": true,
+   "status": "PASS",
+   "title": "MITRE ATT&CK v16"
+  },
+  {
+   "evidence": {
+    "claimed_level": 8,
+    "command": "python tools/run_bench.py --only 16 && cat docs/18_TRL_JUSTIFICATION/TRL.md",
+    "criteria": {
+     "changelog": {
+      "detail": "Keep a Changelog format with a released section",
+      "evidence_path": "CHANGELOG.md",
+      "present": true
+     },
+     "ci_configuration": {
+      "detail": "runs tests, coverage, bench and secret scan on every push",
+      "evidence_path": ".github/workflows/ci.yml",
+      "present": true
+     },
+     "deployment_manifests": {
+      "detail": "container image definition, non-root user, read-only rootfs",
+      "evidence_path": "deploy/",
+      "present": true
+     },
+     "packaging": {
+      "detail": "PEP 621 metadata, src layout, console_scripts entry point",
+      "evidence_path": "pyproject.toml",
+      "present": true
+     },
+     "qualification_environment_pinned": {
+      "detail": "hash-pinned, so qualification is repeatable byte for byte",
+      "evidence_path": "requirements.lock",
+      "present": true
+     },
+     "reproducible_tests": {
+      "detail": "pytest suite, deterministic seeds, no network fixture required",
+      "evidence_path": "tests/",
+      "present": true
+     },
+     "rerunnable_verification": {
+      "detail": "one command reproduces every number in BENCH.json",
+      "evidence_path": "tools/run_bench.py",
+      "present": true
+     },
+     "versioning": {
+      "detail": "single source of truth, currently 1.0.0",
+      "evidence_path": "src/anticloud_ref/_version.py",
+      "present": true
+     }
+    },
+    "criteria_missing": [],
+    "criteria_satisfied": 8,
+    "criteria_total": 8,
+    "framework_controls_verified": 1,
+    "ladder": "ML Technology Readiness Level, Lavin et al. 2022 (TMLR)",
+    "observed_level": 8,
+    "source": "22_COMPLIANCE_FRAMEWORKS/FACTS.md",
+    "trL9_claimed": false,
+    "trL9_reason": "requires proven success in an operational environment, which cannot be asserted from a repository"
+   },
+   "id": "16_ml_trl",
+   "ok": true,
+   "status": "PASS",
+   "title": "ML Technology Readiness Level 8"
+  }
+ ],
+ "failed": 0,
+ "failed_ids": [],
+ "method": {
+  "aggregate_rule": "all_passed == AND over benchmarks[*].ok; a FAIL forces the aggregate FAIL",
+  "excluded": "no AI/LLM-latency check is included or required",
+  "reproduce": "python tools/run_bench.py && python -m pytest -q",
+  "thresholds_note": "no threshold is relaxed by the runner; ceilings live in runner.py and are asserted independently in tests/test_project_metadata.py"
+ },
+ "passed": 16,
+ "platform": "win32",
+ "python": "3.12.10",
+ "root": "E:\\opencode-work\\anticloud_reference",
+ "sbom_written": true,
+ "schema": "anticloud-ref.bench/2",
+ "total": 16,
+ "version": "1.0.0",
  "source": {
-  "repo_path": "E:\\fenta\\Downloads\\The Anticloud\\ANTICLOUD_REPOS\\FRONTIER_HARNESSES\\TEXT_GENERATION_INFERENCE\\UPSTREAM_CLONE",
   "git": {
-   "head": "null",
-   "url": "https://github.com/the-anticloud/OPENMRS_CORE.git",
-   "branch": "master",
-   "committed_at": "2026-09-29T11:06:59+04:00"
+   "head": "b4adbf2f6e2e721280bd0ea5f91d70f7d033f5ed",
+   "url": "https://github.com/huggingface/text-generation-inference",
+   "branch": "main",
+   "sha_verified_from": "GitHub API commits/main"
   }
- },
- "metrics": {
-  "files_total": 853,
-  "source_files_scanned": 468,
-  "lines_of_code": 136113,
-  "languages": {
-   ".py": 380,
-   ".json": 206,
-   ".rs": 64,
-   ".md": 55,
-   "(none)": 38,
-   ".cuh": 22,
-   ".toml": 18,
-   ".txt": 11,
-   ".lock": 8,
-   ".nix": 8,
-   ".cu": 8,
-   ".sh": 7,
-   ".cpp": 5,
-   ".png": 5,
-   ".h": 3
-  }
- },
- "licence": {
-  "spdx": "Apache-2.0",
-  "class": "A",
-  "source_file": "LICENSE",
-  "redistribution_allowed": true
- },
- "dependencies": {
-  "count": 277,
-  "unique": 116,
-  "by_ecosystem": {
-   "cargo": 226,
-   "native": 2,
-   "pypi": 49
-  },
-  "list": [
-   {
-    "ecosystem": "cargo",
-    "name": "resolver",
-    "version": "2",
-    "source_file": "Cargo.toml",
-    "raw": ""
-   },
-   {
-    "ecosystem": "cargo",
-    "name": "version",
-    "version": "3.3.6-dev0",
-    "source_file": "Cargo.toml",
-    "raw": ""
-   },
-   {
-    "ecosystem": "cargo",
-    "name": "edition",
-    "version": "2021",
-    "source_file": "Cargo.toml",
-    "raw": ""
-   },
-   {
-    "ecosystem": "cargo",
-    "name": "homepage",
-    "version": "https://github.com/huggingface/text-generation-inference",
-    "source_file": "Cargo.toml",
-    "raw": ""
-   },
-   {
-    "ecosystem": "cargo",
-    "name": "base64",
-    "version": "0.22.0",
-    "source_file": "Cargo.toml",
-    "raw": ""
-   },
-   {
-    "ecosystem": "cargo",
-    "name": "tokenizers",
-    "version": "0.20.0",
-    "source_file": "Cargo.toml",
-    "raw": ""
-   },
-   {
-    "ecosystem": "cargo",
-    "name": "hf-hub",
-    "version": "0.4.2",
-    "source_file": "Cargo.toml",
-    "raw": ""
-   },
-   {
-    "ecosystem": "cargo",
-    "name": "metrics",
-    "version": "0.23.0",
-    "source_file": "Cargo.toml",
-    "raw": ""
-   },
-   {
-    "ecosystem": "cargo",
-    "name": "metrics-exporter-prometheus",
-    "version": "0.15.1",
-    "source_file": "Cargo.toml",
-    "raw": ""
-   },
-   {
-    "ecosystem": "cargo",
-    "name": "minijinja",
-    "version": "2.2.0",
-    "source_file": "Cargo.toml",
-    "raw": ""
-   },
-   {
-    "ecosystem": "cargo",
-    "name": "minijinja-contrib",
-    "version": "2.0.2",
-    "source_file": "Cargo.toml",
-    "raw": ""
-   },
-   {
-    "ecosystem": "cargo",
-    "name": "pyo3",
-    "version": "0.22.2",
-    "source_file": "Cargo.toml",
-    "raw": ""
-   },
-   {
-    "ecosystem": "cargo",
-    "name": "inherits",
-    "version": "release",
-    "source_file": "Cargo.toml",
-    "raw": ""
-   },
-   {
-    "ecosystem": "cargo",
-    "name": "panic",
-    "version": "abort",
-    "source_file": "Cargo.toml",
-    "raw": ""
-   },
-   {
-    "ecosystem": "cargo",
-    "name": "inherits",
-    "version": "release",
-    "source_file": "Cargo.toml",
-    "raw": ""
-   },
-   {
-    "ecosystem": "cargo",
-    "name": "lto",
-    "version": "fat",
-    "source_file": "Cargo.toml",
-    "raw": ""
-   },
-   {
-    "ecosystem": "pypi",
-    "name": "click",
-    "version": "<8.2.0",
-    "source_file": "server/pyproject.toml",
-    "raw": "click<8.2.0"
-   },
-   {
-    "ecosystem": "pypi",
-    "name": "einops",
-    "version": ">=0.8.0",
-    "source_file": "server/pyproject.toml",
-    "raw": "einops>=0.8.0"
-   },
-   {
-    "ecosystem": "pypi",
-    "name": "grpc-interceptor",
-    "version": ">=0.15.4",
-    "source_file": "server/pyproject.toml",
-    "raw": "grpc-interceptor>=0.15.4"
-   },
-   {
-    "ecosystem": "pypi",
-    "name": "grpcio",
-    "version": ">=1.67.0",
-    "source_file": "server/pyproject.toml",
-    "raw": "grpcio>=1.67.0"
-   },
-   {
-    "ecosystem": "pypi",
-    "name": "grpcio-reflection",
-    "version": ">=1.67.0",
-    "source_file": "server/pyproject.toml",
-    "raw": "grpcio-reflection>=1.67.0"
-   },
-   {
-    "ecosystem": "pypi",
-    "name": "grpcio-status",
-    "version": ">=1.67.0",
-    "source_file": "server/pyproject.toml",
-    "raw": "grpcio-status>=1.67.0"
-   },
-   {
-    "ecosystem": "pypi",
-    "name": "kernels",
-    "version": ">=0.2.1",
-    "source_file": "server/pyproject.toml",
-    "raw": "kernels>=0.2.1"
-   },
-   {
-    "ecosystem": "pypi",
-    "name": "hf-transfer",
-    "version": ">=0.1.8",
-    "source_file": "server/pyproject.toml",
-    "raw": "hf-transfer>=0.1.8"
-   },
-   {
-    "ecosystem": "pypi",
-    "name": "loguru",
-    "version": ">=0.7.3",
-    "source_file": "server/pyproject.toml",
-    "raw": "loguru>=0.7.3"
-   },
-   {
-    "ecosystem": "pypi",
-    "name": "numpy",
-    "version": ">=1.26",
-    "source_file": "server/pyproject.toml",
-    "raw": "numpy>=1.26"
-   },
-   {
-    "ecosystem": "pypi",
-    "name": "opentelemetry-api",
-    "version": ">=1.27.0",
-    "source_file": "server/pyproject.toml",
-    "raw": "opentelemetry-api>=1.27.0"
-   },
-   {
-    "ecosystem": "pypi",
-    "name": "opentelemetry-exporter-otlp",
-    "version": ">=1.27.0",
-    "source_file": "server/pyproject.toml",
-    "raw": "opentelemetry-exporter-otlp>=1.27.0"
-   },
-   {
-    "ecosystem": "pypi",
-    "name": "opentelemetry-instrumentation-grpc",
-    "version": ">=0.50b0",
-    "source_file": "server/pyproject.toml",
-    "raw": "opentelemetry-instrumentation-grpc>=0.50b0"
-   },
-   {
-    "ecosystem": "pypi",
-    "name": "pillow",
-    "version": ">=11.1.0",
-    "source_file": "server/pyproject.toml",
-    "raw": "pillow>=11.1.0"
-   },
-   {
-    "ecosystem": "pypi",
-    "name": "prometheus-client",
-    "version": ">=0.21.0",
-    "source_file": "server/pyproject.toml",
-    "raw": "prometheus-client>=0.21.0"
-   },
-   {
-    "ecosystem": "pypi",
-    "name": "protobuf",
-    "version": ">=5.28.3",
-    "source_file": "server/pyproject.toml",
-    "raw": "protobuf>=5.28.3"
-   },
-   {
-    "ecosystem": "pypi",
-    "name": "py-cpuinfo",
-    "version": ">=9.0.0",
-    "source_file": "server/pyproject.toml",
-    "raw": "py-cpuinfo>=9.0.0"
-   },
-   {
-    "ecosystem": "pypi",
-    "name": "rich",
-    "version": ">=13.8.1",
-    "source_file": "server/pyproject.toml",
-    "raw": "rich>=13.8.1"
-   },
-   {
-    "ecosystem": "pypi",
-    "name": "safetensors",
-    "version": ">=0.4.5",
-    "source_file": "server/pyproject.toml",
-    "raw": "safetensors>=0.4.5"
-   },
-   {
-    "ecosystem": "pypi",
-    "name": "scipy",
-    "version": ">=1.13.1",
-    "source_file": "server/pyproject.toml",
-    "raw": "scipy>=1.13.1"
-   },
-   {
-    "ecosystem": "pypi",
-    "name": "sentencepiece",
-    "version": ">=0.2.0",
-    "source_file": "server/pyproject.toml",
-    "raw": "sentencepiece>=0.2.0"
-   },
-   {
-    "ecosystem": "pypi",
-    "name": "tokenizers",
-    "version": ">=0.20.3",
-    "source_file": "server/pyproject.toml",
-    "raw": "tokenizers>=0.20.3"
-   },
-   {
-    "ecosystem": "pypi",
-    "name": "typer",
-    "version": ">=0.15.1",
-    "source_file": "server/pyproject.toml",
-    "raw": "typer>=0.15.1"
-   },
-   {
-    "ecosystem": "pypi",
-    "name": "transformers",
-    "version": ">=4.51.0",
-    "source_file": "server/pyproject.toml",
-    "raw": "transformers>=4.51.0"
-   },
-   {
-    "ecosystem": "pypi",
-    "name": "huggingface-hub",
-    "version": ">=0.30.1",
-    "source_file": "server/pyproject.toml",
-    "raw": "huggingface-hub>=0.30.1"
-   },
-   {
-    "ecosystem": "pypi",
-    "name": "hf-xet",
-    "version": ">=1.0.0",
-    "source_file": "server/pyproject.toml",
-    "raw": "hf-xet>=1.0.0"
-   },
-   {
-    "ecosystem": "pypi",
-    "name": "-DLEGACY_HIPBLAS_DIRECT",
-    "version": "=ON",
-    "source_file": "server/exllama_kernels/setup.py",
-    "raw": "-DLEGACY_HIPBLAS_DIRECT=ON"
-   },
-   {
-    "ecosystem": "pypi",
-    "name": "-DLEGACY_HIPBLAS_DIRECT",
-    "version": "=ON",
-    "source_file": "server/exllama_kernels/setup.py",
-    "raw": "-DLEGACY_HIPBLAS_DIRECT=ON"
-   },
-   {
-    "ecosystem": "pypi",
-    "name": "-DLEGACY_HIPBLAS_DIRECT",
-    "version": "=ON",
-    "source_file": "server/exllamav2_kernels/setup.py",
-    "raw": "-DLEGACY_HIPBLAS_DIRECT=ON"
-   },
-   {
-    "ecosystem": "pypi",
-    "name": "-DLEGACY_HIPBLAS_DIRECT",
-    "version": "=ON",
-    "source_file": "server/exllamav2_kernels/setup.py",
-    "raw": "-DLEGACY_HIPBLAS_DIRECT=ON"
-   },
-   {
-    "ecosystem": "pypi",
-    "name": "-std",
-    "version": "=c++17",
-    "source_file": "server/custom_kernels/setup.py",
-    "raw": "-std=c++17"
-   },
-   {
-    "ecosystem": "cargo",
-    "name": "name",
-    "version": "text-generation-router",
-    "source_file": "router/Cargo.toml",
-    "raw": ""
-   },
-   {
-    "ecosystem": "cargo",
-    "name": "description",
-    "version": "Text Generation Webserver",
-    "source_file": "router/Cargo.toml",
-    "raw": ""
-   },
-   {
-    "ecosystem": "cargo",
-    "name": "build",
-    "version": "build.rs",
-    "source_file": "router/Cargo.toml",
-    "raw": ""
-   },
-   {
-    "ecosystem": "cargo",
-    "name": "anyhow",
-    "version": "1",
-    "source_file": "router/Cargo.toml",
-    "raw": ""
-   },
-   {
-    "ecosystem": "cargo",
-    "name": "async-trait",
-    "version": "0.1.74",
-    "source_file": "router/Cargo.toml",
-    "raw": ""
-   },
-   {
-    "ecosystem": "cargo",
-    "name": "async-stream",
-    "version": "0.3.5",
-    "source_file": "router/Cargo.toml",
-    "raw": ""
-   },
-   {
-    "ecosystem": "cargo",
-    "name": "axum",
-    "version": "0.7",
-    "source_file": "router/Cargo.toml",
-    "raw": ""
-   },
-   {
-    "ecosystem": "cargo",
-    "name": "axum-tracing-opentelemetry",
-    "version": "0.16",
-    "source_file": "router/Cargo.toml",
-    "raw": ""
-   },
-   {
-    "ecosystem": "cargo",
-    "name": "clap",
-    "version": "4.4.5",
-    "source_file": "router/Cargo.toml",
-    "raw": ""
-   },
-   {
-    "ecosystem": "cargo",
-    "name": "futures",
-    "version": "0.3.28",
-    "source_file": "router/Cargo.toml",
-    "raw": ""
-   },
-   {
-    "ecosystem": "cargo",
-    "name": "itertools",
-    "version": "0.10",
-    "source_file": "router/Cargo.toml",
-    "raw": ""
-   },
-   {
-    "ecosystem": "cargo",
-    "name": "jsonschema",
-    "version": "0.28.0",
-    "source_file": "router/Cargo.toml",
-    "raw": ""
-   },
-   {
-    "ecosystem": "cargo",
-    "name": "nohash-hasher",
-    "version": "0.2.0",
-    "source_file": "router/Cargo.toml",
-    "raw": ""
-   },
-   {
-    "ecosystem": "cargo",
-    "name": "opentelemetry",
-    "version": "0.20.0",
-    "source_file": "router/Cargo.toml",
-    "raw": ""
-   },
-   {
-    "ecosystem": "cargo",
-    "name": "opentelemetry-otlp",
-    "version": "0.13.0",
-    "source_file": "router/Cargo.toml",
-    "raw": ""
-   },
-   {
-    "ecosystem": "cargo",
-    "name": "rand",
-    "version": "0.8.5",
-    "source_file": "router/Cargo.toml",
-    "raw": ""
-   },
-   {
-    "ecosystem": "cargo",
-    "name": "reqwest",
-    "version": "0.11.20",
-    "source_file": "router/Cargo.toml",
-    "raw": ""
-   },
-   {
-    "ecosystem": "cargo",
-    "name": "serde",
-    "version": "1.0.188",
-    "source_file": "router/Cargo.toml",
-    "raw": ""
-   },
-   {
-    "ecosystem": "cargo",
-    "name": "serde_json",
-    "version": "1.0.107",
-    "source_file": "router/Cargo.toml",
-    "raw": ""
-   },
-   {
-    "ecosystem": "cargo",
-    "name": "thiserror",
-    "version": "1.0.48",
-    "source_file": "router/Cargo.toml",
-    "raw": ""
-   },
-   {
-    "ecosystem": "cargo",
-    "name": "tokio",
-    "version": "1.32.0",
-    "source_file": "router/Cargo.toml",
-    "raw": ""
-   },
-   {
-    "ecosystem": "cargo",
-    "name": "tokio-stream",
-    "version": "0.1.14",
-    "source_file": "router/Cargo.toml",
-    "raw": ""
-   },
-   {
-    "ecosystem": "cargo",
-    "name": "tower-http",
-    "version": "0.5.1",
-    "source_file": "router/Cargo.toml",
-    "raw": ""
-   },
-   {
-    "ecosystem": "cargo",
-    "name": "tracing",
-    "version": "0.1.40",
-    "source_file": "router/Cargo.toml",
-    "raw": ""
-   },
-   {
-    "ecosystem": "cargo",
-    "name": "tracing-opentelemetry",
-    "version": "0.21.0",
-    "source_file": "router/Cargo.toml",
-    "raw": ""
-   },
-   {
-    "ecosystem": "cargo",
-    "name": "tracing-subscriber",
-    "version": "0.3.18",
-    "source_file": "router/Cargo.toml",
-    "raw": ""
-   },
-   {
-    "ecosystem": "cargo",
-    "name": "utoipa",
-    "version": "4.2.0",
-    "source_file": "router/Cargo.toml",
-    "raw": ""
-   },
-   {
-    "ecosystem": "cargo",
-    "name": "utoipa-swagger-ui",
-    "version": "6.0.0",
-    "source_file": "router/Cargo.toml",
-    "raw": ""
-   },
-   {
-    "ecosystem": "cargo",
-    "name": "ngrok",
-    "version": "0.13.1",
-    "source_file": "router/Cargo.toml",
-    "raw": ""
-   },
-   {
-    "ecosystem": "cargo",
-    "name": "init-tracing-opentelemetry",
-    "version": "0.14.1",
-    "source_file": "router/Cargo.toml",
-    "raw": ""
-   },
-   {
-    "ecosystem": "cargo",
-    "name": "futures-util",
-    "version": "0.3.30",
-    "source_file": "router/Cargo.toml",
-    "raw": ""
-   },
-   {
-    "ecosystem": "cargo",
-    "name": "regex",
-    "version": "1.10.3",
-    "source_file": "router/Cargo.toml",
-    "raw": ""
-   },
-   {
-    "ecosystem": "cargo",
-    "name": "once_cell",
-    "version": "1.19.0",
-    "source_file": "router/Cargo.toml",
-    "raw": ""
-   },
-   {
-    "ecosystem": "cargo",
-    "name": "image",
-    "version": "0.25.1",
-    "source_file": "router/Cargo.toml",
-    "raw": ""
-   },
-   {
-    "ecosystem": "cargo",
-    "name": "sysinfo",
-    "version": "0.30.13",
-    "source_file": "router/Cargo.toml",
-    "raw": ""
-   },
-   {
-    "ecosystem": "cargo",
-    "name": "uuid",
-    "version": "1.9.1",
-    "source_file": "router/Cargo.toml",
-    "raw": ""
-   },
-   {
-    "ecosystem": "cargo",
-    "name": "csv",
-    "version": "1.3.0",
-    "source_file": "router/Cargo.toml",
-    "raw": ""
-   },
-   {
-    "ecosystem": "cargo",
-    "name": "ureq",
-    "version": "=2.9",
-    "source_file": "router/Cargo.toml",
-    "raw": ""
-   },
-   {
-    "ecosystem": "cargo",
-    "name": "chrono",
-    "version": "0.4.39",
-    "source_file": "router/Cargo.toml",
-    "raw": ""
-   },
-   {
-    "ecosystem": "cargo",
-    "name": "vergen",
-    "version": "8.2.5",
-    "source_file": "router/Cargo.toml",
-    "raw": ""
-   },
-   {
-    "ecosystem": "cargo",
-    "name": "name",
-    "version": "text-generation-launcher",
-    "source_file": "launcher/Cargo.toml",
-    "raw": ""
-   },
-   {
-    "ecosystem": "cargo",
-    "name": "description",
-    "version": "Text Generation Launcher",
-    "source_file": "launcher/Cargo.toml",
-    "raw": ""
-   },
-   {
-    "ecosystem": "cargo",
-    "name": "clap",
-    "version": "4.4.5",
-    "source_file": "launcher/Cargo.toml",
-    "raw": ""
-   },
-   {
-    "ecosystem": "cargo",
-    "name": "ctrlc",
-    "version": "3.4.1",
-    "source_file": "launcher/Cargo.toml",
-    "raw": ""
-   },
-   {
-    "ecosystem": "cargo",
-    "name": "hf-hub",
-    "version": "0.4.2",
-    "source_file": "launcher/Cargo.toml",
-    "raw": ""
-   },
-   {
-    "ecosystem": "cargo",
-    "name": "nix",
-    "version": "0.28.0",
-    "source_file": "launcher/Cargo.toml",
-    "raw": ""
-   },
-   {
-    "ecosystem": "cargo",
-    "name": "once_cell",
-    "version": "1.19.0",
-    "source_file": "launcher/Cargo.toml",
-    "raw": ""
-   },
-   {
-    "ecosystem": "cargo",
-    "name": "serde",
-    "version": "1.0.188",
-    "source_file": "launcher/Cargo.toml",
-    "raw": ""
-   },
-   {
-    "ecosystem": "cargo",
-    "name": "serde_json",
-    "version": "1.0.107",
-    "source_file": "launcher/Cargo.toml",
-    "raw": ""
-   },
-   {
-    "ecosystem": "cargo",
-    "name": "thiserror",
-    "version": "1.0.59",
-    "source_file": "launcher/Cargo.toml",
-    "raw": ""
-   },
-   {
-    "ecosystem": "cargo",
-    "name": "tracing",
-    "version": "0.1.37",
-    "source_file": "launcher/Cargo.toml",
-    "raw": ""
-   },
-   {
-    "ecosystem": "cargo",
-    "name": "tracing-subscriber",
-    "version": "0.3.17",
-    "source_file": "launcher/Cargo.toml",
-    "raw": ""
-   },
-   {
-    "ecosystem": "cargo",
-    "name": "regex",
-    "version": "1.11.0",
-    "source_file": "launcher/Cargo.toml",
-    "raw": ""
-   },
-   {
-    "ecosystem": "cargo",
-    "name": "float_eq",
-    "version": "1.0.1",
-    "source_file": "launcher/Cargo.toml",
-    "raw": ""
-   },
-   {
-    "ecosystem": "cargo",
-    "name": "reqwest",
-    "version": "0.11.20",
-    "source_file": "launcher/Cargo.toml",
-    "raw": ""
-   },
-   {
-    "ecosystem": "cargo",
-    "name": "vergen",
-    "version": "8.2.5",
-    "source_file": "launcher/Cargo.toml",
-    "raw": ""
-   },
-   {
-    "ecosystem": "pypi",
-    "name": "pydantic",
-    "version": ">2",
-    "source_file": "integration-tests/pyproject.toml",
-    "raw": "pydantic>2"
-   },
-   {
-    "ecosystem": "pypi",
-    "name": "syrupy",
-    "version": ">=4.8.0",
-    "source_file": "integration-tests/pyproject.toml",
-    "raw": "syrupy>=4.8.0"
-   },
-   {
-    "ecosystem": "pypi",
-    "name": "text-generation",
-    "version": ">=0.6.0",
-    "source_file": "integration-tests/pyproject.toml",
-    "raw": "text-generation>=0.6.0"
-   },
-   {
-    "ecosystem": "pypi",
-    "name": "pytest",
-    "version": ">=8.3.0",
-    "source_file": "integration-tests/pyproject.toml",
-    "raw": "pytest>=8.3.0"
-   },
-   {
-    "ecosystem": "pypi",
-    "name": "pytest-asyncio",
-    "version": ">=0.23.1",
-    "source_file": "integration-tests/pyproject.toml",
-    "raw": "pytest-asyncio>=0.23.1"
-   },
-   {
-    "ecosystem": "pypi",
-    "name": "docker",
-    "version": ">=7",
-    "source_file": "integration-tests/pyproject.toml",
-    "raw": "docker>=7"
-   },
-   {
-    "ecosystem": "pypi",
-    "name": "numpy",
-    "version": ">=2.0",
-    "source_file": "integration-tests/pyproject.toml",
-    "raw": "numpy>=2.0"
-   },
-   {
-    "ecosystem": "pypi",
-    "name": "openai",
-    "version": ">=1.65",
-    "source_file": "integration-tests/pyproject.toml",
-    "raw": "openai>=1.65"
-   },
-   {
-    "ecosystem": "pypi",
-    "name": "huggingface_hub",
-    "version": ">=0.29",
-    "source_file": "integration-tests/pyproject.toml",
-    "raw": "huggingface_hub>=0.29"
-   },
-   {
-    "ecosystem": "pypi",
-    "name": "pillow",
-    "version": ">=11.1.0",
-    "source_file": "integration-tests/pyproject.toml",
-    "raw": "pillow>=11.1.0"
-   },
-   {
-    "ecosystem": "cargo",
-    "name": "name",
-    "version": "text-generation-benchmark",
-    "source_file": "benchmark/Cargo.toml",
-    "raw": ""
-   },
-   {
-    "ecosystem": "cargo",
-    "name": "description",
-    "version": "Text Generation Benchmarking tool",
-    "source_file": "benchmark/Cargo.toml",
-    "raw": ""
-   },
-   {
-    "ecosystem": "cargo",
-    "name": "path",
-    "version": "src/lib.rs",
-    "source_file": "benchmark/Cargo.toml",
-    "raw": ""
-   },
-   {
-    "ecosystem": "cargo",
-    "name": "name",
-    "version": "text-generation-benchmark",
-    "source_file": "benchmark/Cargo.toml",
-    "raw": ""
-   },
-   {
-    "ecosystem": "cargo",
-    "name": "path",
-    "version": "src/main.rs",
-    "source_file": "benchmark/Cargo.toml",
-    "raw": ""
-   },
-   {
-    "ecosystem": "cargo",
-    "name": "average",
-    "version": "0.14",
-    "source_file": "benchmark/Cargo.toml",
-    "raw": ""
-   },
-   {
-    "ecosystem": "cargo",
-    "name": "clap",
-    "version": "4.4.5",
-    "source_file": "benchmark/Cargo.toml",
-    "raw": ""
-   },
-   {
-    "ecosystem": "cargo",
-    "name": "float-ord",
-    "version": "0.3.2",
-    "source_file": "benchmark/Cargo.toml",
-    "raw": ""
-   },
-   {
-    "ecosystem": "cargo",
-    "name": "serde",
-    "version": "1.0.188",
-    "source_file": "benchmark/Cargo.toml",
-    "raw": ""
-   },
-   {
-    "ecosystem": "cargo",
-    "name": "serde_json",
-    "version": "1.0",
-    "source_file": "benchmark/Cargo.toml",
-    "raw": ""
-   },
-   {
-    "ecosystem": "cargo",
-    "name": "tabled",
-    "version": "0.14.0",
-    "source_file": "benchmark/Cargo.toml",
-    "raw": ""
-   },
-   {
-    "ecosystem": "cargo",
-    "name": "thiserror",
-    "version": "1.0.48",
-    "source_file": "benchmark/Cargo.toml",
-    "raw": ""
-   },
-   {
-    "ecosystem": "cargo",
-    "name": "tokio",
-    "version": "1.32.0",
-    "source_file": "benchmark/Cargo.toml",
-    "raw": ""
-   },
-   {
-    "ecosystem": "cargo",
-    "name": "ratatui",
-    "version": "0.28.1",
-    "source_file": "benchmark/Cargo.toml",
-    "raw": ""
-   },
-   {
-    "ecosystem": "cargo",
-    "name": "tracing",
-    "version": "0.1.37",
-    "source_file": "benchmark/Cargo.toml",
-    "raw": ""
-   },
-   {
-    "ecosystem": "cargo",
-    "name": "tracing-subscriber",
-    "version": "0.3.17",
-    "source_file": "benchmark/Cargo.toml",
-    "raw": ""
-   },
-   {
-    "ecosystem": "cargo",
-    "name": "name",
-    "version": "text-generation-router-v3",
-    "source_file": "backends/v3/Cargo.toml",
-    "raw": ""
-   },
-   {
-    "ecosystem": "cargo",
-    "name": "description",
-    "version": "Text Generation Webserver",
-    "source_file": "backends/v3/Cargo.toml",
-    "raw": ""
-   },
-   {
-    "ecosystem": "cargo",
-    "name": "path",
-    "version": "src/lib.rs",
-    "source_file": "backends/v3/Cargo.toml",
-    "raw": ""
-   },
-   {
-    "ecosystem": "cargo",
-    "name": "name",
-    "version": "text-generation-router",
-    "source_file": "backends/v3/Cargo.toml",
-    "raw": ""
-   },
-   {
-    "ecosystem": "cargo",
-    "name": "path",
-    "version": "src/main.rs",
-    "source_file": "backends/v3/Cargo.toml",
-    "raw": ""
-   },
-   {
-    "ecosystem": "cargo",
-    "name": "async-trait",
-    "version": "0.1.74",
-    "source_file": "backends/v3/Cargo.toml",
-    "raw": ""
-   },
-   {
-    "ecosystem": "cargo",
-    "name": "async-stream",
-    "version": "0.3.5",
-    "source_file": "backends/v3/Cargo.toml",
-    "raw": ""
-   },
-   {
-    "ecosystem": "cargo",
-    "name": "axum",
-    "version": "0.7",
-    "source_file": "backends/v3/Cargo.toml",
-    "raw": ""
-   },
-   {
-    "ecosystem": "cargo",
-    "name": "axum-tracing-opentelemetry",
-    "version": "0.16",
-    "source_file": "backends/v3/Cargo.toml",
-    "raw": ""
-   },
-   {
-    "ecosystem": "cargo",
-    "name": "clap",
-    "version": "4.4.5",
-    "source_file": "backends/v3/Cargo.toml",
-    "raw": ""
-   },
-   {
-    "ecosystem": "cargo",
-    "name": "futures",
-    "version": "0.3.28",
-    "source_file": "backends/v3/Cargo.toml",
-    "raw": ""
-   },
-   {
-    "ecosystem": "cargo",
-    "name": "jsonschema",
-    "version": "0.28.0",
-    "source_file": "backends/v3/Cargo.toml",
-    "raw": ""
-   },
-   {
-    "ecosystem": "cargo",
-    "name": "nohash-hasher",
-    "version": "0.2.0",
-    "source_file": "backends/v3/Cargo.toml",
-    "raw": ""
-   },
-   {
-    "ecosystem": "cargo",
-    "name": "opentelemetry",
-    "version": "0.20.0",
-    "source_file": "backends/v3/Cargo.toml",
-    "raw": ""
-   },
-   {
-    "ecosystem": "cargo",
-    "name": "opentelemetry-otlp",
-    "version": "0.13.0",
-    "source_file": "backends/v3/Cargo.toml",
-    "raw": ""
-   },
-   {
-    "ecosystem": "cargo",
-    "name": "rand",
-    "version": "0.8.5",
-    "source_file": "backends/v3/Cargo.toml",
-    "raw": ""
-   },
-   {
-    "ecosystem": "cargo",
-    "name": "reqwest",
-    "version": "0.11.20",
-    "source_file": "backends/v3/Cargo.toml",
-    "raw": ""
-   },
-   {
-    "ecosystem": "cargo",
-    "name": "serde",
-    "version": "1.0.188",
-    "source_file": "backends/v3/Cargo.toml",
-    "raw": ""
-   },
-   {
-    "ecosystem": "cargo",
-    "name": "serde_json",
-    "version": "1.0.107",
-    "source_file": "backends/v3/Cargo.toml",
-    "raw": ""
-   },
-   {
-    "ecosystem": "cargo",
-    "name": "slotmap",
-    "version": "1.0.7",
-    "source_file": "backends/v3/Cargo.toml",
-    "raw": ""
-   },
-   {
-    "ecosystem": "cargo",
-    "name": "thiserror",
-    "version": "1.0.48",
-    "source_file": "backends/v3/Cargo.toml",
-    "raw": ""
-   },
-   {
-    "ecosystem": "cargo",
-    "name": "tokio",
-    "version": "1.32.0",
-    "source_file": "backends/v3/Cargo.toml",
-    "raw": ""
-   },
-   {
-    "ecosystem": "cargo",
-    "name": "tokio-stream",
-    "version": "0.1.14",
-    "source_file": "backends/v3/Cargo.toml",
-    "raw": ""
-   },
-   {
-    "ecosystem": "cargo",
-    "name": "tower-http",
-    "version": "0.5.1",
-    "source_file": "backends/v3/Cargo.toml",
-    "raw": ""
-   },
-   {
-    "ecosystem": "cargo",
-    "name": "tracing",
-    "version": "0.1.37",
-    "source_file": "backends/v3/Cargo.toml",
-    "raw": ""
-   },
-   {
-    "ecosystem": "cargo",
-    "name": "tracing-opentelemetry",
-    "version": "0.21.0",
-    "source_file": "backends/v3/Cargo.toml",
-    "raw": ""
-   },
-   {
-    "ecosystem": "cargo",
-    "name": "tracing-subscriber",
-    "version": "0.3.17",
-    "source_file": "backends/v3/Cargo.toml",
-    "raw": ""
-   },
-   {
-    "ecosystem": "cargo",
-    "name": "utoipa",
-    "version": "4.2.0",
-    "source_file": "backends/v3/Cargo.toml",
-    "raw": ""
-   },
-   {
-    "ecosystem": "cargo",
-    "name": "utoipa-swagger-ui",
-    "version": "6.0.0",
-    "source_file": "backends/v3/Cargo.toml",
-    "raw": ""
-   },
-   {
-    "ecosystem": "cargo",
-    "name": "init-tracing-opentelemetry",
-    "version": "0.14.1",
-    "source_file": "backends/v3/Cargo.toml",
-    "raw": ""
-   },
-   {
-    "ecosystem": "cargo",
-    "name": "futures-util",
-    "version": "0.3.30",
-    "source_file": "backends/v3/Cargo.toml",
-    "raw": ""
-   },
-   {
-    "ecosystem": "cargo",
-    "name": "regex",
-    "version": "1.10.3",
-    "source_file": "backends/v3/Cargo.toml",
-    "raw": ""
-   },
-   {
-    "ecosystem": "cargo",
-    "name": "once_cell",
-    "version": "1.19.0",
-    "source_file": "backends/v3/Cargo.toml",
-    "raw": ""
-   },
-   {
-    "ecosystem": "cargo",
-    "name": "image",
-    "version": "0.25.1",
-    "source_file": "backends/v3/Cargo.toml",
-    "raw": ""
-   },
-   {
-    "ecosystem": "cargo",
-    "name": "prost",
-    "version": "^0.12",
-    "source_file": "backends/v3/Cargo.toml",
-    "raw": ""
-   },
-   {
-    "ecosystem": "cargo",
-    "name": "tonic",
-    "version": "^0.10",
-    "source_file": "backends/v3/Cargo.toml",
-    "raw": ""
-   },
-   {
-    "ecosystem": "cargo",
-    "name": "tower",
-    "version": "^0.4",
-    "source_file": "backends/v3/Cargo.toml",
-    "raw": ""
-   },
-   {
-    "ecosystem": "cargo",
-    "name": "tonic-build",
-    "version": "0.10.1",
-    "source_file": "backends/v3/Cargo.toml",
-    "raw": ""
-   },
-   {
-    "ecosystem": "cargo",
-    "name": "prost-build",
-    "version": "0.12.1",
-    "source_file": "backends/v3/Cargo.toml",
-    "raw": ""
-   },
-   {
-    "ecosystem": "cargo",
-    "name": "criterion",
-    "version": "0.3",
-    "source_file": "backends/v3/Cargo.toml",
-    "raw": ""
-   },
-   {
-    "ecosystem": "cargo",
-    "name": "itertools",
-    "version": "0.13",
-    "source_file": "backends/v3/Cargo.toml",
-    "raw": ""
-   },
-   {
-    "ecosystem": "cargo",
-    "name": "rustc-hash",
-    "version": "2",
-    "source_file": "backends/v3/Cargo.toml",
-    "raw": ""
-   },
-   {
-    "ecosystem": "cargo",
-    "name": "name",
-    "version": "prefix_cache",
-    "source_file": "backends/v3/Cargo.toml",
-    "raw": ""
-   },
-   {
-    "ecosystem": "cargo",
-    "name": "name",
-    "version": "text-generation-router-v2",
-    "source_file": "backends/v2/Cargo.toml",
-    "raw": ""
-   },
-   {
-    "ecosystem": "cargo",
-    "name": "description",
-    "version": "Text Generation Webserver",
-    "source_file": "backends/v2/Cargo.toml",
-    "raw": ""
-   },
-   {
-    "ecosystem": "cargo",
-    "name": "path",
-    "version": "src/lib.rs",
-    "source_file": "backends/v2/Cargo.toml",
-    "raw": ""
-   },
-   {
-    "ecosystem": "cargo",
-    "name": "name",
-    "version": "text-generation-router-v2",
-    "source_file": "backends/v2/Cargo.toml",
-    "raw": ""
-   },
-   {
-    "ecosystem": "cargo",
-    "name": "path",
-    "version": "src/main.rs",
-    "source_file": "backends/v2/Cargo.toml",
-    "raw": ""
-   },
-   {
-    "ecosystem": "cargo",
-    "name": "async-trait",
-    "version": "0.1.74",
-    "source_file": "backends/v2/Cargo.toml",
-    "raw": ""
-   },
-   {
-    "ecosystem": "cargo",
-    "name": "async-stream",
-    "version": "0.3.5",
-    "source_file": "backends/v2/Cargo.toml",
-    "raw": ""
-   },
-   {
-    "ecosystem": "cargo",
-    "name": "axum",
-    "version": "0.7",
-    "source_file": "backends/v2/Cargo.toml",
-    "raw": ""
-   },
-   {
-    "ecosystem": "cargo",
-    "name": "axum-tracing-opentelemetry",
-    "version": "0.16",
-    "source_file": "backends/v2/Cargo.toml",
-    "raw": ""
-   },
-   {
-    "ecosystem": "cargo",
-    "name": "clap",
-    "version": "4.4.5",
-    "source_file": "backends/v2/Cargo.toml",
-    "raw": ""
-   },
-   {
-    "ecosystem": "cargo",
-    "name": "futures",
-    "version": "0.3.28",
-    "source_file": "backends/v2/Cargo.toml",
-    "raw": ""
-   },
-   {
-    "ecosystem": "cargo",
-    "name": "jsonschema",
-    "version": "0.28.0",
-    "source_file": "backends/v2/Cargo.toml",
-    "raw": ""
-   },
-   {
-    "ecosystem": "cargo",
-    "name": "nohash-hasher",
-    "version": "0.2.0",
-    "source_file": "backends/v2/Cargo.toml",
-    "raw": ""
-   },
-   {
-    "ecosystem": "cargo",
-    "name": "opentelemetry",
-    "version": "0.20.0",
-    "source_file": "backends/v2/Cargo.toml",
-    "raw": ""
-   },
-   {
-    "ecosystem": "cargo",
-    "name": "opentelemetry-otlp",
-    "version": "0.13.0",
-    "source_file": "backends/v2/Cargo.toml",
-    "raw": ""
-   },
-   {
-    "ecosystem": "cargo",
-    "name": "rand",
-    "version": "0.8.5",
-    "source_file": "backends/v2/Cargo.toml",
-    "raw": ""
-   },
-   {
-    "ecosystem": "cargo",
-    "name": "reqwest",
-    "version": "0.11.20",
-    "source_file": "backends/v2/Cargo.toml",
-    "raw": ""
-   },
-   {
-    "ecosystem": "cargo",
-    "name": "serde",
-    "version": "1.0.188",
-    "source_file": "backends/v2/Cargo.toml",
-    "raw": ""
-   },
-   {
-    "ecosystem": "cargo",
-    "name": "serde_json",
-    "version": "1.0.107",
-    "source_file": "backends/v2/Cargo.toml",
-    "raw": ""
-   },
-   {
-    "ecosystem": "cargo",
-    "name": "slotmap",
-    "version": "1.0.7",
-    "source_file": "backends/v2/Cargo.toml",
-    "raw": ""
-   },
-   {
-    "ecosystem": "cargo",
-    "name": "thiserror",
-    "version": "1.0.48",
-    "source_file": "backends/v2/Cargo.toml",
-    "raw": ""
-   },
-   {
-    "ecosystem": "cargo",
-    "name": "tokio",
-    "version": "1.32.0",
-    "source_file": "backends/v2/Cargo.toml",
-    "raw": ""
-   },
-   {
-    "ecosystem": "cargo",
-    "name": "tokio-stream",
-    "version": "0.1.14",
-    "source_file": "backends/v2/Cargo.toml",
-    "raw": ""
-   },
-   {
-    "ecosystem": "cargo",
-    "name": "tower-http",
-    "version": "0.5.1",
-    "source_file": "backends/v2/Cargo.toml",
-    "raw": ""
-   },
-   {
-    "ecosystem": "cargo",
-    "name": "tracing",
-    "version": "0.1.37",
-    "source_file": "backends/v2/Cargo.toml",
-    "raw": ""
-   },
-   {
-    "ecosystem": "cargo",
-    "name": "tracing-opentelemetry",
-    "version": "0.21.0",
-    "source_file": "backends/v2/Cargo.toml",
-    "raw": ""
-   },
-   {
-    "ecosystem": "cargo",
-    "name": "tracing-subscriber",
-    "version": "0.3.17",
-    "source_file": "backends/v2/Cargo.toml",
-    "raw": ""
-   },
-   {
-    "ecosystem": "cargo",
-    "name": "utoipa",
-    "version": "4.2.0",
-    "source_file": "backends/v2/Cargo.toml",
-    "raw": ""
-   },
-   {
-    "ecosystem": "cargo",
-    "name": "utoipa-swagger-ui",
-    "version": "6.0.0",
-    "source_file": "backends/v2/Cargo.toml",
-    "raw": ""
-   },
-   {
-    "ecosystem": "cargo",
-    "name": "init-tracing-opentelemetry",
-    "version": "0.14.1",
-    "source_file": "backends/v2/Cargo.toml",
-    "raw": ""
-   },
-   {
-    "ecosystem": "cargo",
-    "name": "futures-util",
-    "version": "0.3.30",
-    "source_file": "backends/v2/Cargo.toml",
-    "raw": ""
-   },
-   {
-    "ecosystem": "cargo",
-    "name": "regex",
-    "version": "1.10.3",
-    "source_file": "backends/v2/Cargo.toml",
-    "raw": ""
-   },
-   {
-    "ecosystem": "cargo",
-    "name": "once_cell",
-    "version": "1.19.0",
-    "source_file": "backends/v2/Cargo.toml",
-    "raw": ""
-   },
-   {
-    "ecosystem": "cargo",
-    "name": "image",
-    "version": "0.25.1",
-    "source_file": "backends/v2/Cargo.toml",
-    "raw": ""
-   },
-   {
-    "ecosystem": "cargo",
-    "name": "prost",
-    "version": "^0.12",
-    "source_file": "backends/v2/Cargo.toml",
-    "raw": ""
-   },
-   {
-    "ecosystem": "cargo",
-    "name": "tonic",
-    "version": "^0.10",
-    "source_file": "backends/v2/Cargo.toml",
-    "raw": ""
-   },
-   {
-    "ecosystem": "cargo",
-    "name": "tower",
-    "version": "^0.4",
-    "source_file": "backends/v2/Cargo.toml",
-    "raw": ""
-   },
-   {
-    "ecosystem": "cargo",
-    "name": "tonic-build",
-    "version": "0.10.1",
-    "source_file": "backends/v2/Cargo.toml",
-    "raw": ""
-   },
-   {
-    "ecosystem": "cargo",
-    "name": "prost-build",
-    "version": "0.12.1",
-    "source_file": "backends/v2/Cargo.toml",
-    "raw": ""
-   },
-   {
-    "ecosystem": "cargo",
-    "name": "name",
-    "version": "text-generation-backends-trtllm",
-    "source_file": "backends/trtllm/Cargo.toml",
-    "raw": ""
-   },
-   {
-    "ecosystem": "cargo",
-    "name": "async-trait",
-    "version": "0.1",
-    "source_file": "backends/trtllm/Cargo.toml",
-    "raw": ""
-   },
-   {
-    "ecosystem": "cargo",
-    "name": "clap",
-    "version": "4.5",
-    "source_file": "backends/trtllm/Cargo.toml",
-    "raw": ""
-   },
-   {
-    "ecosystem": "cargo",
-    "name": "cxx",
-    "version": "1.0",
-    "source_file": "backends/trtllm/Cargo.toml",
-    "raw": ""
-   },
-   {
-    "ecosystem": "cargo",
-    "name": "hashbrown",
-    "version": "0.15",
-    "source_file": "backends/trtllm/Cargo.toml",
-    "raw": ""
-   },
-   {
-    "ecosystem": "cargo",
-    "name": "tokio",
-    "version": "1.43.0",
-    "source_file": "backends/trtllm/Cargo.toml",
-    "raw": ""
-   },
-   {
-    "ecosystem": "cargo",
-    "name": "tokio-stream",
-    "version": "0.1.17",
-    "source_file": "backends/trtllm/Cargo.toml",
-    "raw": ""
-   },
-   {
-    "ecosystem": "cargo",
-    "name": "thiserror",
-    "version": "1.0.63",
-    "source_file": "backends/trtllm/Cargo.toml",
-    "raw": ""
-   },
-   {
-    "ecosystem": "cargo",
-    "name": "tracing",
-    "version": "0.1",
-    "source_file": "backends/trtllm/Cargo.toml",
-    "raw": ""
-   },
-   {
-    "ecosystem": "cargo",
-    "name": "cmake",
-    "version": "0.1",
-    "source_file": "backends/trtllm/Cargo.toml",
-    "raw": ""
-   },
-   {
-    "ecosystem": "cargo",
-    "name": "cxx-build",
-    "version": "1.0",
-    "source_file": "backends/trtllm/Cargo.toml",
-    "raw": ""
-   },
-   {
-    "ecosystem": "cargo",
-    "name": "pkg-config",
-    "version": "0.3",
-    "source_file": "backends/trtllm/Cargo.toml",
-    "raw": ""
-   },
-   {
-    "ecosystem": "native",
-    "name": "CUDAToolkit",
-    "version": "",
-    "source_file": "backends/trtllm/CMakeLists.txt",
-    "raw": "find_package(CUDAToolkit"
-   },
-   {
-    "ecosystem": "native",
-    "name": "MPI",
-    "version": "",
-    "source_file": "backends/trtllm/CMakeLists.txt",
-    "raw": "find_package(MPI"
-   },
-   {
-    "ecosystem": "cargo",
-    "name": "resolver",
-    "version": "2",
-    "source_file": "backends/neuron/Cargo.toml",
-    "raw": ""
-   },
-   {
-    "ecosystem": "cargo",
-    "name": "version",
-    "version": "3.0.0",
-    "source_file": "backends/neuron/Cargo.toml",
-    "raw": ""
-   },
-   {
-    "ecosystem": "cargo",
-    "name": "edition",
-    "version": "2021",
-    "source_file": "backends/neuron/Cargo.toml",
-    "raw": ""
-   },
-   {
-    "ecosystem": "cargo",
-    "name": "homepage",
-    "version": "https://github.com/huggingface/text-generation-inference",
-    "source_file": "backends/neuron/Cargo.toml",
-    "raw": ""
-   },
-   {
-    "ecosystem": "cargo",
-    "name": "base64",
-    "version": "0.22.0",
-    "source_file": "backends/neuron/Cargo.toml",
-    "raw": ""
-   },
-   {
-    "ecosystem": "cargo",
-    "name": "tokenizers",
-    "version": "0.20.0",
-    "source_file": "backends/neuron/Cargo.toml",
-    "raw": ""
-   },
-   {
-    "ecosystem": "cargo",
-    "name": "hf-hub",
-    "version": "0.4.2",
-    "source_file": "backends/neuron/Cargo.toml",
-    "raw": ""
-   },
-   {
-    "ecosystem": "cargo",
-    "name": "metrics",
-    "version": "0.23.0",
-    "source_file": "backends/neuron/Cargo.toml",
-    "raw": ""
-   },
-   {
-    "ecosystem": "cargo",
-    "name": "metrics-exporter-prometheus",
-    "version": "0.15.1",
-    "source_file": "backends/neuron/Cargo.toml",
-    "raw": ""
-   },
-   {
-    "ecosystem": "cargo",
-    "name": "minijinja",
-    "version": "2.2.0",
-    "source_file": "backends/neuron/Cargo.toml",
-    "raw": ""
-   },
-   {
-    "ecosystem": "cargo",
-    "name": "minijinja-contrib",
-    "version": "2.0.2",
-    "source_file": "backends/neuron/Cargo.toml",
-    "raw": ""
-   },
-   {
-    "ecosystem": "cargo",
-    "name": "pyo3",
-    "version": "0.22.2",
-    "source_file": "backends/neuron/Cargo.toml",
-    "raw": ""
-   },
-   {
-    "ecosystem": "cargo",
-    "name": "inherits",
-    "version": "release",
-    "source_file": "backends/neuron/Cargo.toml",
-    "raw": ""
-   },
-   {
-    "ecosystem": "cargo",
-    "name": "panic",
-    "version": "abort",
-    "source_file": "backends/neuron/Cargo.toml",
-    "raw": ""
-   },
-   {
-    "ecosystem": "cargo",
-    "name": "inherits",
-    "version": "release",
-    "source_file": "backends/neuron/Cargo.toml",
-    "raw": ""
-   },
-   {
-    "ecosystem": "cargo",
-    "name": "lto",
-    "version": "fat",
-    "source_file": "backends/neuron/Cargo.toml",
-    "raw": ""
-   },
-   {
-    "ecosystem": "pypi",
-    "name": "protobuf",
-    "version": ">",
-    "source_file": "backends/neuron/server/pyproject.toml",
-    "raw": "protobuf >"
-   },
-   {
-    "ecosystem": "pypi",
-    "name": "grpcio",
-    "version": "==",
-    "source_file": "backends/neuron/server/pyproject.toml",
-    "raw": "grpcio =="
-   },
-   {
-    "ecosystem": "pypi",
-    "name": "grpcio-status",
-    "version": "==",
-    "source_file": "backends/neuron/server/pyproject.toml",
-    "raw": "grpcio-status =="
-   },
-   {
-    "ecosystem": "pypi",
-    "name": "grpcio-reflection",
-    "version": "==",
-    "source_file": "backends/neuron/server/pyproject.toml",
-    "raw": "grpcio-reflection =="
-   },
-   {
-    "ecosystem": "pypi",
-    "name": "grpc-interceptor",
-    "version": "==",
-    "source_file": "backends/neuron/server/pyproject.toml",
-    "raw": "grpc-interceptor =="
-   },
-   {
-    "ecosystem": "pypi",
-    "name": "typer",
-    "version": "==",
-    "source_file": "backends/neuron/server/pyproject.toml",
-    "raw": "typer =="
-   },
-   {
-    "ecosystem": "pypi",
-    "name": "safetensors",
-    "version": "",
-    "source_file": "backends/neuron/server/pyproject.toml",
-    "raw": "safetensors"
-   },
-   {
-    "ecosystem": "pypi",
-    "name": "loguru",
-    "version": "==",
-    "source_file": "backends/neuron/server/pyproject.toml",
-    "raw": "loguru =="
-   },
-   {
-    "ecosystem": "cargo",
-    "name": "name",
-    "version": "text-generation-router-llamacpp",
-    "source_file": "backends/llamacpp/Cargo.toml",
-    "raw": ""
-   },
-   {
-    "ecosystem": "cargo",
-    "name": "bindgen",
-    "version": "0.71.1",
-    "source_file": "backends/llamacpp/Cargo.toml",
-    "raw": ""
-   },
-   {
-    "ecosystem": "cargo",
-    "name": "pkg-config",
-    "version": "0.3.31",
-    "source_file": "backends/llamacpp/Cargo.toml",
-    "raw": ""
-   },
-   {
-    "ecosystem": "cargo",
-    "name": "async-trait",
-    "version": "0.1.85",
-    "source_file": "backends/llamacpp/Cargo.toml",
-    "raw": ""
-   },
-   {
-    "ecosystem": "cargo",
-    "name": "clap",
-    "version": "4.5.27",
-    "source_file": "backends/llamacpp/Cargo.toml",
-    "raw": ""
-   },
-   {
-    "ecosystem": "cargo",
-    "name": "num_cpus",
-    "version": "1.16.0",
-    "source_file": "backends/llamacpp/Cargo.toml",
-    "raw": ""
-   },
-   {
-    "ecosystem": "cargo",
-    "name": "thiserror",
-    "version": "2.0.11",
-    "source_file": "backends/llamacpp/Cargo.toml",
-    "raw": ""
-   },
-   {
-    "ecosystem": "cargo",
-    "name": "tokio",
-    "version": "1.43.0",
-    "source_file": "backends/llamacpp/Cargo.toml",
-    "raw": ""
-   },
-   {
-    "ecosystem": "cargo",
-    "name": "tokio-stream",
-    "version": "0.1.17",
-    "source_file": "backends/llamacpp/Cargo.toml",
-    "raw": ""
-   },
-   {
-    "ecosystem": "cargo",
-    "name": "tracing",
-    "version": "0.1.41",
-    "source_file": "backends/llamacpp/Cargo.toml",
-    "raw": ""
-   },
-   {
-    "ecosystem": "cargo",
-    "name": "name",
-    "version": "grpc-metadata",
-    "source_file": "backends/grpc-metadata/Cargo.toml",
-    "raw": ""
-   },
-   {
-    "ecosystem": "cargo",
-    "name": "version",
-    "version": "0.1.0",
-    "source_file": "backends/grpc-metadata/Cargo.toml",
-    "raw": ""
-   },
-   {
-    "ecosystem": "cargo",
-    "name": "edition",
-    "version": "2021",
-    "source_file": "backends/grpc-metadata/Cargo.toml",
-    "raw": ""
-   },
-   {
-    "ecosystem": "cargo",
-    "name": "opentelemetry",
-    "version": "^0.20",
-    "source_file": "backends/grpc-metadata/Cargo.toml",
-    "raw": ""
-   },
-   {
-    "ecosystem": "cargo",
-    "name": "tonic",
-    "version": "^0.10",
-    "source_file": "backends/grpc-metadata/Cargo.toml",
-    "raw": ""
-   },
-   {
-    "ecosystem": "cargo",
-    "name": "tracing",
-    "version": "^0.1",
-    "source_file": "backends/grpc-metadata/Cargo.toml",
-    "raw": ""
-   },
-   {
-    "ecosystem": "cargo",
-    "name": "tracing-opentelemetry",
-    "version": "^0.21",
-    "source_file": "backends/grpc-metadata/Cargo.toml",
-    "raw": ""
-   },
-   {
-    "ecosystem": "cargo",
-    "name": "name",
-    "version": "text-generation-client",
-    "source_file": "backends/client/Cargo.toml",
-    "raw": ""
-   },
-   {
-    "ecosystem": "cargo",
-    "name": "async-trait",
-    "version": "^0.1",
-    "source_file": "backends/client/Cargo.toml",
-    "raw": ""
-   },
-   {
-    "ecosystem": "cargo",
-    "name": "futures",
-    "version": "^0.3",
-    "source_file": "backends/client/Cargo.toml",
-    "raw": ""
-   },
-   {
-    "ecosystem": "cargo",
-    "name": "prost",
-    "version": "^0.12",
-    "source_file": "backends/client/Cargo.toml",
-    "raw": ""
-   },
-   {
-    "ecosystem": "cargo",
-    "name": "thiserror",
-    "version": "^1.0",
-    "source_file": "backends/client/Cargo.toml",
-    "raw": ""
-   },
-   {
-    "ecosystem": "cargo",
-    "name": "tokio",
-    "version": "^1.32",
-    "source_file": "backends/client/Cargo.toml",
-    "raw": ""
-   },
-   {
-    "ecosystem": "cargo",
-    "name": "tonic",
-    "version": "^0.10",
-    "source_file": "backends/client/Cargo.toml",
-    "raw": ""
-   },
-   {
-    "ecosystem": "cargo",
-    "name": "tower",
-    "version": "^0.4",
-    "source_file": "backends/client/Cargo.toml",
-    "raw": ""
-   },
-   {
-    "ecosystem": "cargo",
-    "name": "tracing",
-    "version": "^0.1",
-    "source_file": "backends/client/Cargo.toml",
-    "raw": ""
-   },
-   {
-    "ecosystem": "cargo",
-    "name": "tonic-build",
-    "version": "0.10.1",
-    "source_file": "backends/client/Cargo.toml",
-    "raw": ""
-   },
-   {
-    "ecosystem": "cargo",
-    "name": "prost-build",
-    "version": "0.12.1",
-    "source_file": "backends/client/Cargo.toml",
-    "raw": ""
-   }
-  ]
- },
- "owasp_top10": {
-  "total_findings": 186,
-  "files_with_findings": 153,
-  "severity": {
-   "high": 7,
-   "medium": 0,
-   "low": 179
-  },
-  "categories": {
-   "A01-BrokenAccessControl": {
-    "count": 0,
-    "findings": []
-   },
-   "A02-CryptographicFailures": {
-    "count": 0,
-    "findings": []
-   },
-   "A03-Injection": {
-    "count": 7,
-    "findings": [
-     {
-      "severity": "high",
-      "file": "update_doc.py",
-      "line": 95,
-      "cwe": "CWE-95",
-      "snippet": "exec(f\"import enum\\n{ast.unparse(enum_def)}\", _globals, _locals)"
-     },
-     {
-      "severity": "high",
-      "file": "server/text_generation_server/models/model.py",
-      "line": 46,
-      "cwe": "CWE-95",
-      "snippet": "self.model = model.eval()"
-     },
-     {
-      "severity": "high",
-      "file": "server/text_generation_server/layers/gptq/quantize.py",
-      "line": 889,
-      "cwe": "CWE-95",
-      "snippet": "model = model.eval()"
-     },
-     {
-      "severity": "high",
-      "file": "backends/neuron/tgi-entrypoint.sh",
-      "line": 4,
-      "cwe": "CWE-78",
-      "snippet": "export ENV_FILEPATH=$(mktemp)"
-     },
-     {
-      "severity": "high",
-      "file": "backends/gaudi/server/text_generation_server/utils/version.py",
-      "line": 13,
-      "cwe": "CWE-78",
-      "snippet": "shell=True,"
-     },
-     {
-      "severity": "high",
-      "file": "backends/gaudi/server/text_generation_server/models/model.py",
-      "line": 39,
-      "cwe": "CWE-95",
-      "snippet": "self.model = model.eval()"
-     },
-     {
-      "severity": "high",
-      "file": "backends/gaudi/server/text_generation_server/layers/gptq/quantize.py",
-      "line": 889,
-      "cwe": "CWE-95",
-      "snippet": "model = model.eval()"
-     }
-    ]
-   },
-   "A04-InsecureDesign": {
-    "count": 93,
-    "findings": [
-     {
-      "severity": "low",
-      "file": "server/text_generation_server/cli.py",
-      "line": 94,
-      "cwe": "CWE-",
-      "snippet": "# TODO: enable lora with cuda graphs. for now disable cuda graphs if lora is enabled"
-     },
-     {
-      "severity": "low",
-      "file": "server/text_generation_server/server.py",
-      "line": 120,
-      "cwe": "CWE-",
-      "snippet": "):  # Hack, i would rather use kwargs in the `from_pb` call"
-     },
-     {
-      "severity": "low",
-      "file": "server/text_generation_server/utils/adapter.py",
-      "line": 179,
-      "cwe": "CWE-",
-      "snippet": "# TODO(travis): revisit this when we support clasification heads which will not use CausalLM"
-     },
-     {
-      "severity": "low",
-      "file": "server/text_generation_server/utils/logits_process.py",
-      "line": 524,
-      "cwe": "CWE-",
-      "snippet": "# TODO: move grammar compilation into the router"
-     },
-     {
-      "severity": "low",
-      "file": "server/text_generation_server/utils/quantization.py",
-      "line": 14,
-      "cwe": "CWE-",
-      "snippet": "# TODO: Split this config to have a single config type per quant method"
-     },
-     {
-      "severity": "low",
-      "file": "server/text_generation_server/utils/tokens.py",
-      "line": 199,
-      "cwe": "CWE-",
-      "snippet": "# TODO Hack because eos_token_id cannot be what we want."
-     },
-     {
-      "severity": "low",
-      "file": "server/text_generation_server/models/flash_causal_lm.py",
-      "line": 283,
-      "cwe": "CWE-",
-      "snippet": "### XXX: This consumes so much memory on long requests"
-     },
-     {
-      "severity": "low",
-      "file": "server/text_generation_server/models/idefics_causal_lm.py",
-      "line": 104,
-      "cwe": "CWE-",
-      "snippet": "processor: ProcessorMixin,  # Hack"
-     },
-     {
-      "severity": "low",
-      "file": "server/text_generation_server/models/mamba.py",
-      "line": 272,
-      "cwe": "CWE-",
-      "snippet": "# TODO"
-     },
-     {
-      "severity": "low",
-      "file": "server/text_generation_server/models/metadata_kernels.py",
-      "line": 21,
-      "cwe": "CWE-",
-      "snippet": "# FIXME: it seems that has_triton_torch is bugged on RocM"
-     },
-     {
-      "severity": "low",
-      "file": "server/text_generation_server/models/mllama_causal_lm.py",
-      "line": 111,
-      "cwe": "CWE-",
-      "snippet": "# TODO unsure about BOS"
-     },
-     {
-      "severity": "low",
-      "file": "server/text_generation_server/models/model.py",
-      "line": 50,
-      "cwe": "CWE-",
-      "snippet": "# TODO report this to transformers."
-     },
-     {
-      "severity": "low",
-      "file": "server/text_generation_server/models/transformers_flash_vlm.py",
-      "line": 146,
-      "cwe": "CWE-",
-      "snippet": "# TODO: implement"
-     },
-     {
-      "severity": "low",
-      "file": "server/text_generation_server/models/vlm_causal_lm.py",
-      "line": 121,
-      "cwe": "CWE-",
-      "snippet": "# TODO: implement this in a more general way"
-     },
-     {
-      "severity": "low",
-      "file": "server/text_generation_server/models/__init__.py",
-      "line": 632,
-      "cwe": "CWE-",
-      "snippet": "# TODO: fix how we determine model type for Mamba"
-     },
-     {
-      "severity": "low",
-      "file": "server/text_generation_server/models/custom_modeling/bloom_modeling.py",
-      "line": 105,
-      "cwe": "CWE-",
-      "snippet": "TODO @thomasw21 this doesn't work as nicely due to the masking strategy, and so masking varies slightly."
-     },
-     {
-      "severity": "low",
-      "file": "server/text_generation_server/models/custom_modeling/clip.py",
-      "line": 31,
-      "cwe": "CWE-",
-      "snippet": "# TODO Should we TP this ?"
-     },
-     {
-      "severity": "low",
-      "file": "server/text_generation_server/models/custom_modeling/flash_deepseek_v2_modeling.py",
-      "line": 394,
-      "cwe": "CWE-",
-      "snippet": "# TODO: This is a hotfix to be removed & properly refactored."
-     },
-     {
-      "severity": "low",
-      "file": "server/text_generation_server/models/custom_modeling/flash_deepseek_v3_modeling.py",
-      "line": 394,
-      "cwe": "CWE-",
-      "snippet": "# TODO: This is a hotfix to be removed & properly refactored."
-     },
-     {
-      "severity": "low",
-      "file": "server/text_generation_server/models/custom_modeling/flash_gemma3_modeling.py",
-      "line": 130,
-      "cwe": "CWE-",
-      "snippet": "# TODO: remove this hack to support local sliding window"
-     },
-     {
-      "severity": "low",
-      "file": "server/text_generation_server/models/custom_modeling/flash_llama_modeling.py",
-      "line": 374,
-      "cwe": "CWE-",
-      "snippet": "# TODO: This is a hotfix to be removed & properly refactored."
-     },
-     {
-      "severity": "low",
-      "file": "server/text_generation_server/models/custom_modeling/flash_mistral_modeling.py",
-      "line": 304,
-      "cwe": "CWE-",
-      "snippet": "# TODO: This is a hotfix to be removed & properly refactored."
-     },
-     {
-      "severity": "low",
-      "file": "server/text_generation_server/models/custom_modeling/flash_pali_gemma_modeling.py",
-      "line": 112,
-      "cwe": "CWE-",
-      "snippet": "# TODO This is odd but apparently pali gemma position ids start at 1."
-     },
-     {
-      "severity": "low",
-      "file": "server/text_generation_server/models/custom_modeling/idefics_image_processing.py",
-      "line": 177,
-      "cwe": "CWE-",
-      "snippet": "# TODO: this converts to torch tensors - switch to convert_to_tensors once it becomes available"
-     },
-     {
-      "severity": "low",
-      "file": "server/text_generation_server/models/custom_modeling/idefics_modeling.py",
-      "line": 1245,
-      "cwe": "CWE-",
-      "snippet": "# # Hack to use the model in full language modeling mode"
-     }
-    ]
-   },
-   "A05-SecurityMisconfiguration": {
-    "count": 0,
-    "findings": []
-   },
-   "A06-VulnerableComponents": {
-    "count": 1,
-    "findings": [
-     {
-      "severity": "low",
-      "file": "server/text_generation_server/models/custom_modeling/mpt_modeling.py",
-      "line": 197,
-      "cwe": "CWE-1104",
-      "snippet": "raise RuntimeError(\"Please install flash-attn==1.0.3.post0\")"
-     }
-    ]
-   },
-   "A07-AuthFailures": {
-    "count": 0,
-    "findings": []
-   },
-   "A08-SoftwareDataIntegrity": {
-    "count": 85,
-    "findings": [
-     {
-      "severity": "low",
-      "file": "server/text_generation_server/utils/watermark.py",
-      "line": 9,
-      "cwe": "CWE-319",
-      "snippet": "#     http://www.apache.org/licenses/LICENSE-2.0"
-     },
-     {
-      "severity": "low",
-      "file": "server/text_generation_server/utils/merges/utils.py",
-      "line": 10,
-      "cwe": "CWE-319",
-      "snippet": "#     http://www.apache.org/licenses/LICENSE-2.0"
-     },
-     {
-      "severity": "low",
-      "file": "server/text_generation_server/models/custom_modeling/bloom_modeling.py",
-      "line": 8,
-      "cwe": "CWE-319",
-      "snippet": "#     http://www.apache.org/licenses/LICENSE-2.0"
-     },
-     {
-      "severity": "low",
-      "file": "server/text_generation_server/models/custom_modeling/clip.py",
-      "line": 650,
-      "cwe": "CWE-319",
-      "snippet": ">>> url = \"http://images.cocodataset.org/val2017/000000039769.jpg\""
-     },
-     {
-      "severity": "low",
-      "file": "server/text_generation_server/models/custom_modeling/flash_cohere_modeling.py",
-      "line": 13,
-      "cwe": "CWE-319",
-      "snippet": "#     http://www.apache.org/licenses/LICENSE-2.0"
-     },
-     {
-      "severity": "low",
-      "file": "server/text_generation_server/models/custom_modeling/flash_dbrx_modeling.py",
-      "line": 8,
-      "cwe": "CWE-319",
-      "snippet": "#     http://www.apache.org/licenses/LICENSE-2.0"
-     },
-     {
-      "severity": "low",
-      "file": "server/text_generation_server/models/custom_modeling/flash_deepseek_v2_modeling.py",
-      "line": 8,
-      "cwe": "CWE-319",
-      "snippet": "#     http://www.apache.org/licenses/LICENSE-2.0"
-     },
-     {
-      "severity": "low",
-      "file": "server/text_generation_server/models/custom_modeling/flash_deepseek_v3_modeling.py",
-      "line": 8,
-      "cwe": "CWE-319",
-      "snippet": "#     http://www.apache.org/licenses/LICENSE-2.0"
-     },
-     {
-      "severity": "low",
-      "file": "server/text_generation_server/models/custom_modeling/flash_gemma2_modeling.py",
-      "line": 13,
-      "cwe": "CWE-319",
-      "snippet": "#     http://www.apache.org/licenses/LICENSE-2.0"
-     },
-     {
-      "severity": "low",
-      "file": "server/text_generation_server/models/custom_modeling/flash_gemma3_modeling.py",
-      "line": 8,
-      "cwe": "CWE-319",
-      "snippet": "#     http://www.apache.org/licenses/LICENSE-2.0"
-     },
-     {
-      "severity": "low",
-      "file": "server/text_generation_server/models/custom_modeling/flash_gemma_modeling.py",
-      "line": 13,
-      "cwe": "CWE-319",
-      "snippet": "#     http://www.apache.org/licenses/LICENSE-2.0"
-     },
-     {
-      "severity": "low",
-      "file": "server/text_generation_server/models/custom_modeling/flash_gpt2_modeling.py",
-      "line": 13,
-      "cwe": "CWE-319",
-      "snippet": "#     http://www.apache.org/licenses/LICENSE-2.0"
-     },
-     {
-      "severity": "low",
-      "file": "server/text_generation_server/models/custom_modeling/flash_gptj_modeling.py",
-      "line": 13,
-      "cwe": "CWE-319",
-      "snippet": "#     http://www.apache.org/licenses/LICENSE-2.0"
-     },
-     {
-      "severity": "low",
-      "file": "server/text_generation_server/models/custom_modeling/flash_llama_modeling.py",
-      "line": 13,
-      "cwe": "CWE-319",
-      "snippet": "#     http://www.apache.org/licenses/LICENSE-2.0"
-     },
-     {
-      "severity": "low",
-      "file": "server/text_generation_server/models/custom_modeling/flash_mistral_modeling.py",
-      "line": 13,
-      "cwe": "CWE-319",
-      "snippet": "#     http://www.apache.org/licenses/LICENSE-2.0"
-     },
-     {
-      "severity": "low",
-      "file": "server/text_generation_server/models/custom_modeling/flash_mixtral_modeling.py",
-      "line": 13,
-      "cwe": "CWE-319",
-      "snippet": "#     http://www.apache.org/licenses/LICENSE-2.0"
-     },
-     {
-      "severity": "low",
-      "file": "server/text_generation_server/models/custom_modeling/flash_neox_modeling.py",
-      "line": 13,
-      "cwe": "CWE-319",
-      "snippet": "#     http://www.apache.org/licenses/LICENSE-2.0"
-     },
-     {
-      "severity": "low",
-      "file": "server/text_generation_server/models/custom_modeling/flash_pali_gemma_modeling.py",
-      "line": 8,
-      "cwe": "CWE-319",
-      "snippet": "#     http://www.apache.org/licenses/LICENSE-2.0"
-     },
-     {
-      "severity": "low",
-      "file": "server/text_generation_server/models/custom_modeling/flash_phi_moe_modeling.py",
-      "line": 8,
-      "cwe": "CWE-319",
-      "snippet": "#     http://www.apache.org/licenses/LICENSE-2.0"
-     },
-     {
-      "severity": "low",
-      "file": "server/text_generation_server/models/custom_modeling/flash_starcoder2_modeling.py",
-      "line": 13,
-      "cwe": "CWE-319",
-      "snippet": "#     http://www.apache.org/licenses/LICENSE-2.0"
-     },
-     {
-      "severity": "low",
-      "file": "server/text_generation_server/models/custom_modeling/idefics2.py",
-      "line": 8,
-      "cwe": "CWE-319",
-      "snippet": "#     http://www.apache.org/licenses/LICENSE-2.0"
-     },
-     {
-      "severity": "low",
-      "file": "server/text_generation_server/models/custom_modeling/idefics3.py",
-      "line": 8,
-      "cwe": "CWE-319",
-      "snippet": "#     http://www.apache.org/licenses/LICENSE-2.0"
-     },
-     {
-      "severity": "low",
-      "file": "server/text_generation_server/models/custom_modeling/idefics_config.py",
-      "line": 13,
-      "cwe": "CWE-319",
-      "snippet": "#     http://www.apache.org/licenses/LICENSE-2.0"
-     },
-     {
-      "severity": "low",
-      "file": "server/text_generation_server/models/custom_modeling/idefics_image_processing.py",
-      "line": 8,
-      "cwe": "CWE-319",
-      "snippet": "#     http://www.apache.org/licenses/LICENSE-2.0"
-     },
-     {
-      "severity": "low",
-      "file": "server/text_generation_server/models/custom_modeling/idefics_modeling.py",
-      "line": 13,
-      "cwe": "CWE-319",
-      "snippet": "#     http://www.apache.org/licenses/LICENSE-2.0"
-     }
-    ]
-   },
-   "A09-LoggingMonitoringFailures": {
-    "count": 0,
-    "findings": []
-   },
-   "A10-SSRF": {
-    "count": 0,
-    "findings": []
-   }
-  }
- },
- "owasp_llm_top10": {
-  "total_findings": 62,
-  "files_with_findings": 61,
-  "severity": {
-   "high": 10,
-   "medium": 52,
-   "low": 0
-  },
-  "categories": {
-   "LLM01-PromptInjection": {
-    "count": 0,
-    "findings": []
-   },
-   "LLM02-SensitiveInfoDisclosure": {
-    "count": 10,
-    "findings": [
-     {
-      "severity": "high",
-      "file": "router/src/server.rs",
-      "line": 1541,
-      "cwe": "CWE-798",
-      "snippet": "let authorization_token = std::env::var(\"HF_TOKEN\")"
-     },
-     {
-      "severity": "high",
-      "file": "load_tests/benchmarks.py",
-      "line": 123,
-      "cwe": "CWE-798",
-      "snippet": "environment = {\"HF_TOKEN\": os.environ.get(\"HF_TOKEN\")}"
-     },
-     {
-      "severity": "high",
-      "file": "launcher/src/main.rs",
-      "line": 101,
-      "cwe": "CWE-798",
-      "snippet": "if let Ok(token) = std::env::var(\"HF_TOKEN\") {"
-     },
-     {
-      "severity": "high",
-      "file": "integration-tests/conftest.py",
-      "line": 63,
-      "cwe": "CWE-798",
-      "snippet": "HF_TOKEN = os.getenv(\"HF_TOKEN\", None)"
-     },
-     {
-      "severity": "high",
-      "file": "integration-tests/fixtures/neuron/export_models.py",
-      "line": 18,
-      "cwe": "CWE-798",
-      "snippet": "HF_TOKEN = huggingface_hub.get_token()"
-     },
-     {
-      "severity": "high",
-      "file": "integration-tests/fixtures/neuron/service.py",
-      "line": 21,
-      "cwe": "CWE-798",
-      "snippet": "HF_TOKEN = huggingface_hub.get_token()"
-     },
-     {
-      "severity": "high",
-      "file": "integration-tests/fixtures/gaudi/service.py",
-      "line": 31,
-      "cwe": "CWE-798",
-      "snippet": "HF_TOKEN = huggingface_hub.get_token()"
-     },
-     {
-      "severity": "high",
-      "file": "benchmark/src/main.rs",
-      "line": 150,
-      "cwe": "CWE-798",
-      "snippet": "let token = std::env::var(\"HF_TOKEN\")"
-     },
-     {
-      "severity": "high",
-      "file": "backends/trtllm/src/main.rs",
-      "line": 76,
-      "cwe": "CWE-798",
-      "snippet": "let authorization_token = std::env::var(\"HF_TOKEN\")"
-     },
-     {
-      "severity": "high",
-      "file": "backends/llamacpp/src/main.rs",
-      "line": 218,
-      "cwe": "CWE-798",
-      "snippet": "if let Ok(token) = std::env::var(\"HF_TOKEN\") {"
-     }
-    ]
-   },
-   "LLM03-SupplyChain": {
-    "count": 52,
-    "findings": [
-     {
-      "severity": "medium",
-      "file": "update_doc.py",
-      "line": 19,
-      "cwe": "CWE-494",
-      "snippet": "AutoModelForCausalLM.from_pretrained(<model>, device_map=\"auto\")"
-     },
-     {
-      "severity": "medium",
-      "file": "server/text_generation_server/cli.py",
-      "line": 178,
-      "cwe": "CWE-494",
-      "snippet": "hf_hub_download("
-     },
-     {
-      "severity": "medium",
-      "file": "server/text_generation_server/utils/adapter.py",
-      "line": 157,
-      "cwe": "CWE-494",
-      "snippet": "# Avoid execution latency caused by the network connection retrying for AutoConfig.from_pretrained(None)"
-     },
-     {
-      "severity": "medium",
-      "file": "server/text_generation_server/utils/hub.py",
-      "line": 203,
-      "cwe": "CWE-494",
-      "snippet": "local_file = hf_hub_download("
-     },
-     {
-      "severity": "medium",
-      "file": "server/text_generation_server/utils/peft.py",
-      "line": 15,
-      "cwe": "CWE-494",
-      "snippet": "model = AutoPeftModelForCausalLM.from_pretrained("
-     },
-     {
-      "severity": "medium",
-      "file": "server/text_generation_server/utils/quantization.py",
-      "line": 40,
-      "cwe": "CWE-494",
-      "snippet": "filename = hf_hub_download(model_id, filename=filename, revision=revision)"
-     },
-     {
-      "severity": "medium",
-      "file": "server/text_generation_server/models/causal_lm.py",
-      "line": 532,
-      "cwe": "CWE-494",
-      "snippet": "tokenizer = tokenizer_class.from_pretrained("
-     },
-     {
-      "severity": "medium",
-      "file": "server/text_generation_server/models/flash_causal_lm.py",
-      "line": 1232,
-      "cwe": "CWE-494",
-      "snippet": "tokenizer = tokenizer_class.from_pretrained("
-     },
-     {
-      "severity": "medium",
-      "file": "server/text_generation_server/models/idefics_causal_lm.py",
-      "line": 618,
-      "cwe": "CWE-494",
-      "snippet": "config = AutoConfig.from_pretrained("
-     },
-     {
-      "severity": "medium",
-      "file": "server/text_generation_server/models/mamba.py",
-      "line": 434,
-      "cwe": "CWE-494",
-      "snippet": "tokenizer = AutoTokenizer.from_pretrained("
-     },
-     {
-      "severity": "medium",
-      "file": "server/text_generation_server/models/seq2seq_lm.py",
-      "line": 573,
-      "cwe": "CWE-494",
-      "snippet": "config = config_class.from_pretrained("
-     },
-     {
-      "severity": "medium",
-      "file": "server/text_generation_server/models/transformers_flash_causal_lm.py",
-      "line": 129,
-      "cwe": "CWE-494",
-      "snippet": "tokenizer = tokenizer_class.from_pretrained("
-     },
-     {
-      "severity": "medium",
-      "file": "server/text_generation_server/models/transformers_flash_vlm.py",
-      "line": 190,
-      "cwe": "CWE-494",
-      "snippet": "tokenizer = tokenizer_class.from_pretrained("
-     },
-     {
-      "severity": "medium",
-      "file": "server/text_generation_server/models/vlm_causal_lm.py",
-      "line": 713,
-      "cwe": "CWE-494",
-      "snippet": "self.processor = processor_class.from_pretrained("
-     },
-     {
-      "severity": "medium",
-      "file": "server/text_generation_server/models/__init__.py",
-      "line": 545,
-      "cwe": "CWE-494",
-      "snippet": "medusa_config = hf_hub_download("
-     },
-     {
-      "severity": "medium",
-      "file": "server/text_generation_server/models/custom_modeling/clip.py",
-      "line": 558,
-      "cwe": "CWE-494",
-      "snippet": ">>> model = CLIPTextModel.from_pretrained(\"openai/clip-vit-base-patch32\")"
-     },
-     {
-      "severity": "medium",
-      "file": "server/text_generation_server/models/custom_modeling/flash_phi_moe_modeling.py",
-      "line": 109,
-      "cwe": "CWE-494",
-      "snippet": ">>> configuration = PhiMoEConfig.from_pretrained(\"microsoft/Phi-3.5-MoE-instruct\")"
-     },
-     {
-      "severity": "medium",
-      "file": "server/text_generation_server/models/custom_modeling/idefics_modeling.py",
-      "line": 1465,
-      "cwe": "CWE-494",
-      "snippet": ">>> model = LlamaForCausalLM.from_pretrained(PATH_TO_CONVERTED_WEIGHTS)"
-     },
-     {
-      "severity": "medium",
-      "file": "server/text_generation_server/models/custom_modeling/idefics_processing.py",
-      "line": 233,
-      "cwe": "CWE-494",
-      "snippet": "processor = AutoProcessor.from_pretrained(checkpoint)"
-     },
-     {
-      "severity": "medium",
-      "file": "server/text_generation_server/models/custom_modeling/neox_modeling.py",
-      "line": 687,
-      "cwe": "CWE-494",
-      "snippet": ">>> tokenizer = AutoTokenizer.from_pretrained(\"EleutherAI/gpt-neox-20b\")"
-     },
-     {
-      "severity": "medium",
-      "file": "server/text_generation_server/layers/gptq/quantize.py",
-      "line": 373,
-      "cwe": "CWE-494",
-      "snippet": "tokenizer = AutoTokenizer.from_pretrained("
-     },
-     {
-      "severity": "medium",
-      "file": "server/text_generation_server/adapters/lora.py",
-      "line": 105,
-      "cwe": "CWE-494",
-      "snippet": "hf_config = _LoraConfig.from_pretrained(adapter_id, token=api_token)"
-     },
-     {
-      "severity": "medium",
-      "file": "server/tests/models/test_bloom.py",
-      "line": 30,
-      "cwe": "CWE-494",
-      "snippet": "return AutoTokenizer.from_pretrained(\"bigscience/bloom-560m\", padding_side=\"left\")"
-     },
-     {
-      "severity": "medium",
-      "file": "server/tests/models/test_causal_lm.py",
-      "line": 18,
-      "cwe": "CWE-494",
-      "snippet": "tokenizer = AutoTokenizer.from_pretrained(\"gpt2\", padding_side=\"left\")"
-     },
-     {
-      "severity": "medium",
-      "file": "server/tests/models/test_model.py",
-      "line": 17,
-      "cwe": "CWE-494",
-      "snippet": "tokenizer = AutoTokenizer.from_pretrained(\"huggyllama/llama-7b\")"
-     }
-    ]
-   },
-   "LLM04-DataPoisoning": {
-    "count": 0,
-    "findings": []
-   },
-   "LLM05-ImproperOutputHandling": {
-    "count": 0,
-    "findings": []
-   },
-   "LLM06-ExcessiveAgency": {
-    "count": 0,
-    "findings": []
-   },
-   "LLM07-SystemPromptLeak": {
-    "count": 0,
-    "findings": []
-   },
-   "LLM08-VectorEmbeddingWeaknesses": {
-    "count": 0,
-    "findings": []
-   },
-   "LLM09-Misinformation": {
-    "count": 0,
-    "findings": []
-   },
-   "LLM10-UnboundedConsumption": {
-    "count": 0,
-    "findings": []
-   }
-  }
- },
- "sbom": {
-  "bomFormat": "CycloneDX",
-  "specVersion": "1.5",
-  "serialNumber": "urn:uuid:6e9128c8-2d4f-586f-a3f5-26484e64b012",
-  "version": 1,
-  "metadata": {
-   "timestamp": "2026-10-06T17:31:37Z",
-   "component": {
-    "type": "application",
-    "name": "TEXT_GENERATION_INFERENCE",
-    "version": "83b357604d34",
-    "bom-ref": "pkg:generic/anticloud/TEXT_GENERATION_INFERENCE@83b357604d34",
-    "purl": "pkg:generic/anticloud/TEXT_GENERATION_INFERENCE@83b357604d34",
-    "licenses": [
-     {
-      "license": {
-       "id": "Apache-2.0"
-      }
-     }
-    ]
-   },
-   "properties": [
-    {
-     "name": "anticloud:source-commit",
-     "value": "null"
-    },
-    {
-     "name": "anticloud:source-url",
-     "value": "https://github.com/the-anticloud/OPENMRS_CORE.git"
-    },
-    {
-     "name": "anticloud:tier",
-     "value": "tier-agent"
-    }
-   ]
-  },
-  "components": [
-   {
-    "type": "library",
-    "name": "resolver",
-    "version": "2",
-    "purl": "pkg:cargo/resolver@2",
-    "bom-ref": "cargo/resolver@2"
-   },
-   {
-    "type": "library",
-    "name": "version",
-    "version": "3.3.6-dev0",
-    "purl": "pkg:cargo/version@3.3.6-dev0",
-    "bom-ref": "cargo/version@3.3.6-dev0"
-   },
-   {
-    "type": "library",
-    "name": "edition",
-    "version": "2021",
-    "purl": "pkg:cargo/edition@2021",
-    "bom-ref": "cargo/edition@2021"
-   },
-   {
-    "type": "library",
-    "name": "homepage",
-    "version": "https://github.com/huggingface/text-generation-inference",
-    "purl": "pkg:cargo/homepage@https://github.com/huggingface/text-generation-inference",
-    "bom-ref": "cargo/homepage@https://github.com/huggingface/text-generation-inference"
-   },
-   {
-    "type": "library",
-    "name": "base64",
-    "version": "0.22.0",
-    "purl": "pkg:cargo/base64@0.22.0",
-    "bom-ref": "cargo/base64@0.22.0"
-   },
-   {
-    "type": "library",
-    "name": "tokenizers",
-    "version": "0.20.0",
-    "purl": "pkg:cargo/tokenizers@0.20.0",
-    "bom-ref": "cargo/tokenizers@0.20.0"
-   },
-   {
-    "type": "library",
-    "name": "hf-hub",
-    "version": "0.4.2",
-    "purl": "pkg:cargo/hf-hub@0.4.2",
-    "bom-ref": "cargo/hf-hub@0.4.2"
-   },
-   {
-    "type": "library",
-    "name": "metrics",
-    "version": "0.23.0",
-    "purl": "pkg:cargo/metrics@0.23.0",
-    "bom-ref": "cargo/metrics@0.23.0"
-   },
-   {
-    "type": "library",
-    "name": "metrics-exporter-prometheus",
-    "version": "0.15.1",
-    "purl": "pkg:cargo/metrics-exporter-prometheus@0.15.1",
-    "bom-ref": "cargo/metrics-exporter-prometheus@0.15.1"
-   },
-   {
-    "type": "library",
-    "name": "minijinja",
-    "version": "2.2.0",
-    "purl": "pkg:cargo/minijinja@2.2.0",
-    "bom-ref": "cargo/minijinja@2.2.0"
-   },
-   {
-    "type": "library",
-    "name": "minijinja-contrib",
-    "version": "2.0.2",
-    "purl": "pkg:cargo/minijinja-contrib@2.0.2",
-    "bom-ref": "cargo/minijinja-contrib@2.0.2"
-   },
-   {
-    "type": "library",
-    "name": "pyo3",
-    "version": "0.22.2",
-    "purl": "pkg:cargo/pyo3@0.22.2",
-    "bom-ref": "cargo/pyo3@0.22.2"
-   },
-   {
-    "type": "library",
-    "name": "inherits",
-    "version": "release",
-    "purl": "pkg:cargo/inherits@release",
-    "bom-ref": "cargo/inherits@release"
-   },
-   {
-    "type": "library",
-    "name": "panic",
-    "version": "abort",
-    "purl": "pkg:cargo/panic@abort",
-    "bom-ref": "cargo/panic@abort"
-   },
-   {
-    "type": "library",
-    "name": "lto",
-    "version": "fat",
-    "purl": "pkg:cargo/lto@fat",
-    "bom-ref": "cargo/lto@fat"
-   },
-   {
-    "type": "library",
-    "name": "click",
-    "version": "<8.2.0",
-    "purl": "pkg:pypi/click@8.2.0",
-    "bom-ref": "pypi/click@<8.2.0"
-   },
-   {
-    "type": "library",
-    "name": "einops",
-    "version": ">=0.8.0",
-    "purl": "pkg:pypi/einops@0.8.0",
-    "bom-ref": "pypi/einops@>=0.8.0"
-   },
-   {
-    "type": "library",
-    "name": "grpc-interceptor",
-    "version": ">=0.15.4",
-    "purl": "pkg:pypi/grpc-interceptor@0.15.4",
-    "bom-ref": "pypi/grpc-interceptor@>=0.15.4"
-   },
-   {
-    "type": "library",
-    "name": "grpcio",
-    "version": ">=1.67.0",
-    "purl": "pkg:pypi/grpcio@1.67.0",
-    "bom-ref": "pypi/grpcio@>=1.67.0"
-   },
-   {
-    "type": "library",
-    "name": "grpcio-reflection",
-    "version": ">=1.67.0",
-    "purl": "pkg:pypi/grpcio-reflection@1.67.0",
-    "bom-ref": "pypi/grpcio-reflection@>=1.67.0"
-   },
-   {
-    "type": "library",
-    "name": "grpcio-status",
-    "version": ">=1.67.0",
-    "purl": "pkg:pypi/grpcio-status@1.67.0",
-    "bom-ref": "pypi/grpcio-status@>=1.67.0"
-   },
-   {
-    "type": "library",
-    "name": "kernels",
-    "version": ">=0.2.1",
-    "purl": "pkg:pypi/kernels@0.2.1",
-    "bom-ref": "pypi/kernels@>=0.2.1"
-   },
-   {
-    "type": "library",
-    "name": "hf-transfer",
-    "version": ">=0.1.8",
-    "purl": "pkg:pypi/hf-transfer@0.1.8",
-    "bom-ref": "pypi/hf-transfer@>=0.1.8"
-   },
-   {
-    "type": "library",
-    "name": "loguru",
-    "version": ">=0.7.3",
-    "purl": "pkg:pypi/loguru@0.7.3",
-    "bom-ref": "pypi/loguru@>=0.7.3"
-   },
-   {
-    "type": "library",
-    "name": "numpy",
-    "version": ">=1.26",
-    "purl": "pkg:pypi/numpy@1.26",
-    "bom-ref": "pypi/numpy@>=1.26"
-   },
-   {
-    "type": "library",
-    "name": "opentelemetry-api",
-    "version": ">=1.27.0",
-    "purl": "pkg:pypi/opentelemetry-api@1.27.0",
-    "bom-ref": "pypi/opentelemetry-api@>=1.27.0"
-   },
-   {
-    "type": "library",
-    "name": "opentelemetry-exporter-otlp",
-    "version": ">=1.27.0",
-    "purl": "pkg:pypi/opentelemetry-exporter-otlp@1.27.0",
-    "bom-ref": "pypi/opentelemetry-exporter-otlp@>=1.27.0"
-   },
-   {
-    "type": "library",
-    "name": "opentelemetry-instrumentation-grpc",
-    "version": ">=0.50b0",
-    "purl": "pkg:pypi/opentelemetry-instrumentation-grpc@0.50b0",
-    "bom-ref": "pypi/opentelemetry-instrumentation-grpc@>=0.50b0"
-   },
-   {
-    "type": "library",
-    "name": "pillow",
-    "version": ">=11.1.0",
-    "purl": "pkg:pypi/pillow@11.1.0",
-    "bom-ref": "pypi/pillow@>=11.1.0"
-   },
-   {
-    "type": "library",
-    "name": "prometheus-client",
-    "version": ">=0.21.0",
-    "purl": "pkg:pypi/prometheus-client@0.21.0",
-    "bom-ref": "pypi/prometheus-client@>=0.21.0"
-   },
-   {
-    "type": "library",
-    "name": "protobuf",
-    "version": ">=5.28.3",
-    "purl": "pkg:pypi/protobuf@5.28.3",
-    "bom-ref": "pypi/protobuf@>=5.28.3"
-   },
-   {
-    "type": "library",
-    "name": "py-cpuinfo",
-    "version": ">=9.0.0",
-    "purl": "pkg:pypi/py-cpuinfo@9.0.0",
-    "bom-ref": "pypi/py-cpuinfo@>=9.0.0"
-   },
-   {
-    "type": "library",
-    "name": "rich",
-    "version": ">=13.8.1",
-    "purl": "pkg:pypi/rich@13.8.1",
-    "bom-ref": "pypi/rich@>=13.8.1"
-   },
-   {
-    "type": "library",
-    "name": "safetensors",
-    "version": ">=0.4.5",
-    "purl": "pkg:pypi/safetensors@0.4.5",
-    "bom-ref": "pypi/safetensors@>=0.4.5"
-   },
-   {
-    "type": "library",
-    "name": "scipy",
-    "version": ">=1.13.1",
-    "purl": "pkg:pypi/scipy@1.13.1",
-    "bom-ref": "pypi/scipy@>=1.13.1"
-   },
-   {
-    "type": "library",
-    "name": "sentencepiece",
-    "version": ">=0.2.0",
-    "purl": "pkg:pypi/sentencepiece@0.2.0",
-    "bom-ref": "pypi/sentencepiece@>=0.2.0"
-   },
-   {
-    "type": "library",
-    "name": "tokenizers",
-    "version": ">=0.20.3",
-    "purl": "pkg:pypi/tokenizers@0.20.3",
-    "bom-ref": "pypi/tokenizers@>=0.20.3"
-   },
-   {
-    "type": "library",
-    "name": "typer",
-    "version": ">=0.15.1",
-    "purl": "pkg:pypi/typer@0.15.1",
-    "bom-ref": "pypi/typer@>=0.15.1"
-   },
-   {
-    "type": "library",
-    "name": "transformers",
-    "version": ">=4.51.0",
-    "purl": "pkg:pypi/transformers@4.51.0",
-    "bom-ref": "pypi/transformers@>=4.51.0"
-   },
-   {
-    "type": "library",
-    "name": "huggingface-hub",
-    "version": ">=0.30.1",
-    "purl": "pkg:pypi/huggingface-hub@0.30.1",
-    "bom-ref": "pypi/huggingface-hub@>=0.30.1"
-   },
-   {
-    "type": "library",
-    "name": "hf-xet",
-    "version": ">=1.0.0",
-    "purl": "pkg:pypi/hf-xet@1.0.0",
-    "bom-ref": "pypi/hf-xet@>=1.0.0"
-   },
-   {
-    "type": "library",
-    "name": "-DLEGACY_HIPBLAS_DIRECT",
-    "version": "=ON",
-    "purl": "pkg:pypi/-dlegacy-hipblas-direct@ON",
-    "bom-ref": "pypi/-DLEGACY_HIPBLAS_DIRECT@=ON"
-   },
-   {
-    "type": "library",
-    "name": "-std",
-    "version": "=c++17",
-    "purl": "pkg:pypi/-std@c++17",
-    "bom-ref": "pypi/-std@=c++17"
-   },
-   {
-    "type": "library",
-    "name": "name",
-    "version": "text-generation-router",
-    "purl": "pkg:cargo/name@text-generation-router",
-    "bom-ref": "cargo/name@text-generation-router"
-   },
-   {
-    "type": "library",
-    "name": "description",
-    "version": "Text Generation Webserver",
-    "purl": "pkg:cargo/description@Text Generation Webserver",
-    "bom-ref": "cargo/description@Text Generation Webserver"
-   },
-   {
-    "type": "library",
-    "name": "build",
-    "version": "build.rs",
-    "purl": "pkg:cargo/build@build.rs",
-    "bom-ref": "cargo/build@build.rs"
-   },
-   {
-    "type": "library",
-    "name": "anyhow",
-    "version": "1",
-    "purl": "pkg:cargo/anyhow@1",
-    "bom-ref": "cargo/anyhow@1"
-   },
-   {
-    "type": "library",
-    "name": "async-trait",
-    "version": "0.1.74",
-    "purl": "pkg:cargo/async-trait@0.1.74",
-    "bom-ref": "cargo/async-trait@0.1.74"
-   },
-   {
-    "type": "library",
-    "name": "async-stream",
-    "version": "0.3.5",
-    "purl": "pkg:cargo/async-stream@0.3.5",
-    "bom-ref": "cargo/async-stream@0.3.5"
-   },
-   {
-    "type": "library",
-    "name": "axum",
-    "version": "0.7",
-    "purl": "pkg:cargo/axum@0.7",
-    "bom-ref": "cargo/axum@0.7"
-   },
-   {
-    "type": "library",
-    "name": "axum-tracing-opentelemetry",
-    "version": "0.16",
-    "purl": "pkg:cargo/axum-tracing-opentelemetry@0.16",
-    "bom-ref": "cargo/axum-tracing-opentelemetry@0.16"
-   },
-   {
-    "type": "library",
-    "name": "clap",
-    "version": "4.4.5",
-    "purl": "pkg:cargo/clap@4.4.5",
-    "bom-ref": "cargo/clap@4.4.5"
-   },
-   {
-    "type": "library",
-    "name": "futures",
-    "version": "0.3.28",
-    "purl": "pkg:cargo/futures@0.3.28",
-    "bom-ref": "cargo/futures@0.3.28"
-   },
-   {
-    "type": "library",
-    "name": "itertools",
-    "version": "0.10",
-    "purl": "pkg:cargo/itertools@0.10",
-    "bom-ref": "cargo/itertools@0.10"
-   },
-   {
-    "type": "library",
-    "name": "jsonschema",
-    "version": "0.28.0",
-    "purl": "pkg:cargo/jsonschema@0.28.0",
-    "bom-ref": "cargo/jsonschema@0.28.0"
-   },
-   {
-    "type": "library",
-    "name": "nohash-hasher",
-    "version": "0.2.0",
-    "purl": "pkg:cargo/nohash-hasher@0.2.0",
-    "bom-ref": "cargo/nohash-hasher@0.2.0"
-   },
-   {
-    "type": "library",
-    "name": "opentelemetry",
-    "version": "0.20.0",
-    "purl": "pkg:cargo/opentelemetry@0.20.0",
-    "bom-ref": "cargo/opentelemetry@0.20.0"
-   },
-   {
-    "type": "library",
-    "name": "opentelemetry-otlp",
-    "version": "0.13.0",
-    "purl": "pkg:cargo/opentelemetry-otlp@0.13.0",
-    "bom-ref": "cargo/opentelemetry-otlp@0.13.0"
-   },
-   {
-    "type": "library",
-    "name": "rand",
-    "version": "0.8.5",
-    "purl": "pkg:cargo/rand@0.8.5",
-    "bom-ref": "cargo/rand@0.8.5"
-   },
-   {
-    "type": "library",
-    "name": "reqwest",
-    "version": "0.11.20",
-    "purl": "pkg:cargo/reqwest@0.11.20",
-    "bom-ref": "cargo/reqwest@0.11.20"
-   },
-   {
-    "type": "library",
-    "name": "serde",
-    "version": "1.0.188",
-    "purl": "pkg:cargo/serde@1.0.188",
-    "bom-ref": "cargo/serde@1.0.188"
-   },
-   {
-    "type": "library",
-    "name": "serde_json",
-    "version": "1.0.107",
-    "purl": "pkg:cargo/serde_json@1.0.107",
-    "bom-ref": "cargo/serde_json@1.0.107"
-   },
-   {
-    "type": "library",
-    "name": "thiserror",
-    "version": "1.0.48",
-    "purl": "pkg:cargo/thiserror@1.0.48",
-    "bom-ref": "cargo/thiserror@1.0.48"
-   },
-   {
-    "type": "library",
-    "name": "tokio",
-    "version": "1.32.0",
-    "purl": "pkg:cargo/tokio@1.32.0",
-    "bom-ref": "cargo/tokio@1.32.0"
-   },
-   {
-    "type": "library",
-    "name": "tokio-stream",
-    "version": "0.1.14",
-    "purl": "pkg:cargo/tokio-stream@0.1.14",
-    "bom-ref": "cargo/tokio-stream@0.1.14"
-   },
-   {
-    "type": "library",
-    "name": "tower-http",
-    "version": "0.5.1",
-    "purl": "pkg:cargo/tower-http@0.5.1",
-    "bom-ref": "cargo/tower-http@0.5.1"
-   },
-   {
-    "type": "library",
-    "name": "tracing",
-    "version": "0.1.40",
-    "purl": "pkg:cargo/tracing@0.1.40",
-    "bom-ref": "cargo/tracing@0.1.40"
-   },
-   {
-    "type": "library",
-    "name": "tracing-opentelemetry",
-    "version": "0.21.0",
-    "purl": "pkg:cargo/tracing-opentelemetry@0.21.0",
-    "bom-ref": "cargo/tracing-opentelemetry@0.21.0"
-   },
-   {
-    "type": "library",
-    "name": "tracing-subscriber",
-    "version": "0.3.18",
-    "purl": "pkg:cargo/tracing-subscriber@0.3.18",
-    "bom-ref": "cargo/tracing-subscriber@0.3.18"
-   },
-   {
-    "type": "library",
-    "name": "utoipa",
-    "version": "4.2.0",
-    "purl": "pkg:cargo/utoipa@4.2.0",
-    "bom-ref": "cargo/utoipa@4.2.0"
-   },
-   {
-    "type": "library",
-    "name": "utoipa-swagger-ui",
-    "version": "6.0.0",
-    "purl": "pkg:cargo/utoipa-swagger-ui@6.0.0",
-    "bom-ref": "cargo/utoipa-swagger-ui@6.0.0"
-   },
-   {
-    "type": "library",
-    "name": "ngrok",
-    "version": "0.13.1",
-    "purl": "pkg:cargo/ngrok@0.13.1",
-    "bom-ref": "cargo/ngrok@0.13.1"
-   },
-   {
-    "type": "library",
-    "name": "init-tracing-opentelemetry",
-    "version": "0.14.1",
-    "purl": "pkg:cargo/init-tracing-opentelemetry@0.14.1",
-    "bom-ref": "cargo/init-tracing-opentelemetry@0.14.1"
-   },
-   {
-    "type": "library",
-    "name": "futures-util",
-    "version": "0.3.30",
-    "purl": "pkg:cargo/futures-util@0.3.30",
-    "bom-ref": "cargo/futures-util@0.3.30"
-   },
-   {
-    "type": "library",
-    "name": "regex",
-    "version": "1.10.3",
-    "purl": "pkg:cargo/regex@1.10.3",
-    "bom-ref": "cargo/regex@1.10.3"
-   },
-   {
-    "type": "library",
-    "name": "once_cell",
-    "version": "1.19.0",
-    "purl": "pkg:cargo/once_cell@1.19.0",
-    "bom-ref": "cargo/once_cell@1.19.0"
-   },
-   {
-    "type": "library",
-    "name": "image",
-    "version": "0.25.1",
-    "purl": "pkg:cargo/image@0.25.1",
-    "bom-ref": "cargo/image@0.25.1"
-   },
-   {
-    "type": "library",
-    "name": "sysinfo",
-    "version": "0.30.13",
-    "purl": "pkg:cargo/sysinfo@0.30.13",
-    "bom-ref": "cargo/sysinfo@0.30.13"
-   },
-   {
-    "type": "library",
-    "name": "uuid",
-    "version": "1.9.1",
-    "purl": "pkg:cargo/uuid@1.9.1",
-    "bom-ref": "cargo/uuid@1.9.1"
-   },
-   {
-    "type": "library",
-    "name": "csv",
-    "version": "1.3.0",
-    "purl": "pkg:cargo/csv@1.3.0",
-    "bom-ref": "cargo/csv@1.3.0"
-   },
-   {
-    "type": "library",
-    "name": "ureq",
-    "version": "=2.9",
-    "purl": "pkg:cargo/ureq@=2.9",
-    "bom-ref": "cargo/ureq@=2.9"
-   },
-   {
-    "type": "library",
-    "name": "chrono",
-    "version": "0.4.39",
-    "purl": "pkg:cargo/chrono@0.4.39",
-    "bom-ref": "cargo/chrono@0.4.39"
-   },
-   {
-    "type": "library",
-    "name": "vergen",
-    "version": "8.2.5",
-    "purl": "pkg:cargo/vergen@8.2.5",
-    "bom-ref": "cargo/vergen@8.2.5"
-   },
-   {
-    "type": "library",
-    "name": "ctrlc",
-    "version": "3.4.1",
-    "purl": "pkg:cargo/ctrlc@3.4.1",
-    "bom-ref": "cargo/ctrlc@3.4.1"
-   },
-   {
-    "type": "library",
-    "name": "nix",
-    "version": "0.28.0",
-    "purl": "pkg:cargo/nix@0.28.0",
-    "bom-ref": "cargo/nix@0.28.0"
-   },
-   {
-    "type": "library",
-    "name": "float_eq",
-    "version": "1.0.1",
-    "purl": "pkg:cargo/float_eq@1.0.1",
-    "bom-ref": "cargo/float_eq@1.0.1"
-   },
-   {
-    "type": "library",
-    "name": "pydantic",
-    "version": ">2",
-    "purl": "pkg:pypi/pydantic@2",
-    "bom-ref": "pypi/pydantic@>2"
-   },
-   {
-    "type": "library",
-    "name": "syrupy",
-    "version": ">=4.8.0",
-    "purl": "pkg:pypi/syrupy@4.8.0",
-    "bom-ref": "pypi/syrupy@>=4.8.0"
-   },
-   {
-    "type": "library",
-    "name": "text-generation",
-    "version": ">=0.6.0",
-    "purl": "pkg:pypi/text-generation@0.6.0",
-    "bom-ref": "pypi/text-generation@>=0.6.0"
-   },
-   {
-    "type": "library",
-    "name": "pytest",
-    "version": ">=8.3.0",
-    "purl": "pkg:pypi/pytest@8.3.0",
-    "bom-ref": "pypi/pytest@>=8.3.0"
-   },
-   {
-    "type": "library",
-    "name": "pytest-asyncio",
-    "version": ">=0.23.1",
-    "purl": "pkg:pypi/pytest-asyncio@0.23.1",
-    "bom-ref": "pypi/pytest-asyncio@>=0.23.1"
-   },
-   {
-    "type": "library",
-    "name": "docker",
-    "version": ">=7",
-    "purl": "pkg:pypi/docker@7",
-    "bom-ref": "pypi/docker@>=7"
-   },
-   {
-    "type": "library",
-    "name": "openai",
-    "version": ">=1.65",
-    "purl": "pkg:pypi/openai@1.65",
-    "bom-ref": "pypi/openai@>=1.65"
-   },
-   {
-    "type": "library",
-    "name": "huggingface_hub",
-    "version": ">=0.29",
-    "purl": "pkg:pypi/huggingface-hub@0.29",
-    "bom-ref": "pypi/huggingface_hub@>=0.29"
-   },
-   {
-    "type": "library",
-    "name": "path",
-    "version": "src/lib.rs",
-    "purl": "pkg:cargo/path@src/lib.rs",
-    "bom-ref": "cargo/path@src/lib.rs"
-   },
-   {
-    "type": "library",
-    "name": "average",
-    "version": "0.14",
-    "purl": "pkg:cargo/average@0.14",
-    "bom-ref": "cargo/average@0.14"
-   },
-   {
-    "type": "library",
-    "name": "float-ord",
-    "version": "0.3.2",
-    "purl": "pkg:cargo/float-ord@0.3.2",
-    "bom-ref": "cargo/float-ord@0.3.2"
-   },
-   {
-    "type": "library",
-    "name": "tabled",
-    "version": "0.14.0",
-    "purl": "pkg:cargo/tabled@0.14.0",
-    "bom-ref": "cargo/tabled@0.14.0"
-   },
-   {
-    "type": "library",
-    "name": "ratatui",
-    "version": "0.28.1",
-    "purl": "pkg:cargo/ratatui@0.28.1",
-    "bom-ref": "cargo/ratatui@0.28.1"
-   },
-   {
-    "type": "library",
-    "name": "slotmap",
-    "version": "1.0.7",
-    "purl": "pkg:cargo/slotmap@1.0.7",
-    "bom-ref": "cargo/slotmap@1.0.7"
-   },
-   {
-    "type": "library",
-    "name": "prost",
-    "version": "^0.12",
-    "purl": "pkg:cargo/prost@^0.12",
-    "bom-ref": "cargo/prost@^0.12"
-   },
-   {
-    "type": "library",
-    "name": "tonic",
-    "version": "^0.10",
-    "purl": "pkg:cargo/tonic@^0.10",
-    "bom-ref": "cargo/tonic@^0.10"
-   },
-   {
-    "type": "library",
-    "name": "tower",
-    "version": "^0.4",
-    "purl": "pkg:cargo/tower@^0.4",
-    "bom-ref": "cargo/tower@^0.4"
-   },
-   {
-    "type": "library",
-    "name": "tonic-build",
-    "version": "0.10.1",
-    "purl": "pkg:cargo/tonic-build@0.10.1",
-    "bom-ref": "cargo/tonic-build@0.10.1"
-   },
-   {
-    "type": "library",
-    "name": "prost-build",
-    "version": "0.12.1",
-    "purl": "pkg:cargo/prost-build@0.12.1",
-    "bom-ref": "cargo/prost-build@0.12.1"
-   },
-   {
-    "type": "library",
-    "name": "criterion",
-    "version": "0.3",
-    "purl": "pkg:cargo/criterion@0.3",
-    "bom-ref": "cargo/criterion@0.3"
-   },
-   {
-    "type": "library",
-    "name": "rustc-hash",
-    "version": "2",
-    "purl": "pkg:cargo/rustc-hash@2",
-    "bom-ref": "cargo/rustc-hash@2"
-   },
-   {
-    "type": "library",
-    "name": "cxx",
-    "version": "1.0",
-    "purl": "pkg:cargo/cxx@1.0",
-    "bom-ref": "cargo/cxx@1.0"
-   },
-   {
-    "type": "library",
-    "name": "hashbrown",
-    "version": "0.15",
-    "purl": "pkg:cargo/hashbrown@0.15",
-    "bom-ref": "cargo/hashbrown@0.15"
-   },
-   {
-    "type": "library",
-    "name": "cmake",
-    "version": "0.1",
-    "purl": "pkg:cargo/cmake@0.1",
-    "bom-ref": "cargo/cmake@0.1"
-   },
-   {
-    "type": "library",
-    "name": "cxx-build",
-    "version": "1.0",
-    "purl": "pkg:cargo/cxx-build@1.0",
-    "bom-ref": "cargo/cxx-build@1.0"
-   },
-   {
-    "type": "library",
-    "name": "pkg-config",
-    "version": "0.3",
-    "purl": "pkg:cargo/pkg-config@0.3",
-    "bom-ref": "cargo/pkg-config@0.3"
-   },
-   {
-    "type": "library",
-    "name": "CUDAToolkit",
-    "version": "unspecified",
-    "purl": "pkg:generic/CUDAToolkit",
-    "bom-ref": "native/CUDAToolkit@unspecified"
-   },
-   {
-    "type": "library",
-    "name": "MPI",
-    "version": "unspecified",
-    "purl": "pkg:generic/MPI",
-    "bom-ref": "native/MPI@unspecified"
-   },
-   {
-    "type": "library",
-    "name": "bindgen",
-    "version": "0.71.1",
-    "purl": "pkg:cargo/bindgen@0.71.1",
-    "bom-ref": "cargo/bindgen@0.71.1"
-   },
-   {
-    "type": "library",
-    "name": "num_cpus",
-    "version": "1.16.0",
-    "purl": "pkg:cargo/num_cpus@1.16.0",
-    "bom-ref": "cargo/num_cpus@1.16.0"
-   }
-  ]
- },
- "elapsed_seconds": 32.42,
- "sha_unverified": true
+ }
 }

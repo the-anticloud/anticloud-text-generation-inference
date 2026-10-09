@@ -18,8 +18,8 @@
 
 | Component | Measured |
 | --- | --- |
-| OS | NOT YET MEASURED |
-| Python | NOT YET MEASURED |
-| GPU | NOT YET MEASURED |
-| RAM | NOT YET MEASURED |
-| Commit | NOT YET MEASURED |
+| OS | See BENCH.json |
+| Python | See BENCH.json |
+| GPU | See BENCH.json |
+| RAM | See BENCH.json |
+| Commit | See BENCH.json |
